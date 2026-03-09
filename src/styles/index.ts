@@ -8,6 +8,7 @@ export const defaultStyles = StyleSheet.create({
 	},
 	text: {
 		fontSize: fontSize.md,
+		color: colors.text,
 	},
 })
 

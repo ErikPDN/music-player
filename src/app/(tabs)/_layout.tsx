@@ -1,5 +1,11 @@
+import { Tabs } from 'expo-router'
+
 const TabsNavigation = () => {
-	return <></>
+	return (
+		<Tabs>
+			<Tabs.Screen name="(songs)" />
+		</Tabs>
+	)
 }
 
 export default TabsNavigation
