@@ -14,6 +14,7 @@ export const fontSize = {
 	md: 20,
 	lg: 24,
 	xl: 28,
+	xxl: 32,
 }
 
 export const screenPadding = {

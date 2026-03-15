@@ -1,10 +1,11 @@
+import Header from '@/components/Header'
 import { defaultStyles } from '@/styles'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 
 const FavoritesScreen = () => {
 	return (
 		<View style={defaultStyles.container}>
-			<Text style={defaultStyles.text}></Text>
+			<Header title="Favorites" />
 		</View>
 	)
 }

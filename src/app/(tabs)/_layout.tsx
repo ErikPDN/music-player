@@ -16,8 +16,6 @@ const TabsNavigation = () => {
 				},
 				tabBarStyle: {
 					position: 'absolute',
-					// borderTopLeftRadius: 20,
-					// borderTopRightRadius: 20,
 					borderTopWidth: 0,
 					paddingTop: 10,
 					paddingBottom: 40,

@@ -11,7 +11,7 @@ const DownloadsScreenLayout = () => {
 					name="index"
 					options={{
 						...StackScreenWithSearchBar,
-						headerTitle: 'Downloads',
+						headerShown: false,
 					}}
 				/>
 			</Stack>

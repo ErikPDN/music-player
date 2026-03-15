@@ -8,7 +8,7 @@ interface HeaderProps {
 const Header = ({ title }: HeaderProps) => {
 	return (
 		<View style={defaultStyles.container}>
-			<Text style={defaultStyles.screenTitle}>{title}</Text>
+			<Text style={defaultStyles.headerTitle}>{title}</Text>
 		</View>
 	)
 }

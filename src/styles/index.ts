@@ -17,6 +17,14 @@ export const defaultStyles = StyleSheet.create({
 		marginBottom: 16,
 		fontWeight: 'bold',
 	},
+	headerTitle: {
+		fontSize: fontSize.xxl,
+		color: colors.text,
+		fontWeight: 'bold',
+		marginBottom: 8,
+		marginTop: 42,
+		marginHorizontal: 12,
+	},
 })
 
 export const utilsStyles = StyleSheet.create({})
