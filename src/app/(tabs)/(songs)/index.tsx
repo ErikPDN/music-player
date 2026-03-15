@@ -1,11 +1,15 @@
 import Header from '@/components/Header'
+import TracksList from '@/components/TracksList'
 import { defaultStyles } from '@/styles'
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 
 const SongsScreen = () => {
 	return (
 		<View style={defaultStyles.container}>
-			<Header title="Songs" />
+			<ScrollView>
+				<Header title="Songs" />
+				<TracksList scrollEnabled={true} />
+			</ScrollView>
 		</View>
 	)
 }

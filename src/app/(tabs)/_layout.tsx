@@ -20,11 +20,10 @@ const TabsNavigation = () => {
 					paddingTop: 10,
 					paddingBottom: 40,
 					elevation: 0,
-					backgroundColor: 'transparent',
+					backgroundColor: colors.background,
 					overflow: 'hidden',
-					borderColor: 'transparent',
-					shadowColor: 'transparent',
 					height: 110,
+					opacity: 1,
 				},
 				tabBarBackground: () => <BlurView intensity={30} style={styles.blurViewStyle} />,
 			}}
