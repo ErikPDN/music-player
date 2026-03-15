@@ -10,6 +10,12 @@ export const defaultStyles = StyleSheet.create({
 		fontSize: fontSize.md,
 		color: colors.text,
 	},
+	screenTitle: {
+		fontSize: fontSize.md,
+		color: colors.text,
+		marginTop: 12,
+		marginBottom: 16,
+	},
 })
 
 export const utilsStyles = StyleSheet.create({})

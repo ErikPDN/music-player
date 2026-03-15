@@ -4,7 +4,7 @@ import { Text, View } from 'react-native'
 const DownloadsScreen = () => {
 	return (
 		<View style={defaultStyles.container}>
-			<Text style={defaultStyles.text}>Downloads Screen</Text>
+			<Text style={defaultStyles.text}></Text>
 		</View>
 	)
 }
