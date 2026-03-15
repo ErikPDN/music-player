@@ -15,6 +15,7 @@ export const defaultStyles = StyleSheet.create({
 		color: colors.text,
 		marginTop: 12,
 		marginBottom: 16,
+		fontWeight: 'bold',
 	},
 })
 

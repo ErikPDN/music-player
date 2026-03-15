@@ -1,3 +1,4 @@
+import Header from '@/components/Header'
 import { colors, fontSize } from '@/constants/tokens'
 import { FontAwesome } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
@@ -13,7 +14,6 @@ const TabsNavigation = () => {
 					fontSize: fontSize.xs,
 					fontWeight: '500',
 				},
-				headerShown: false,
 				tabBarStyle: {
 					position: 'absolute',
 					// borderTopLeftRadius: 20,
@@ -35,6 +35,7 @@ const TabsNavigation = () => {
 				name="favorites"
 				options={{
 					title: 'Favorites',
+					header: () => <Header title="Favorites" />,
 					tabBarIcon: ({ color }) => <FontAwesome name="heart" size={20} color={color} />,
 				}}
 			/>
@@ -42,6 +43,7 @@ const TabsNavigation = () => {
 				name="(songs)"
 				options={{
 					title: 'Songs',
+					header: () => <Header title="Songs" />,
 					tabBarIcon: ({ color }) => <FontAwesome name="music" size={20} color={color} />,
 				}}
 			/>
@@ -49,6 +51,7 @@ const TabsNavigation = () => {
 				name="playlists"
 				options={{
 					title: 'Playlists',
+					header: () => <Header title="Playlists" />,
 					tabBarIcon: ({ color }) => <FontAwesome name="list" size={20} color={color} />,
 				}}
 			/>
@@ -56,6 +59,7 @@ const TabsNavigation = () => {
 				name="downloads"
 				options={{
 					title: 'Downloads',
+					header: () => <Header title="Downloads" />,
 					tabBarIcon: ({ color }) => <FontAwesome name="download" size={20} color={color} />,
 				}}
 			/>
