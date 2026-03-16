@@ -1,4 +1,3 @@
-import Header from '@/components/Header'
 import { colors, fontSize } from '@/constants/tokens'
 import { FontAwesome } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
@@ -31,33 +30,29 @@ const TabsNavigation = () => {
 			<Tabs.Screen
 				name="favorites"
 				options={{
-					title: 'Favorites',
-					header: () => <Header title="Favorites" />,
 					tabBarIcon: ({ color }) => <FontAwesome name="heart" size={20} color={color} />,
+					headerShown: false,
 				}}
 			/>
 			<Tabs.Screen
 				name="(songs)"
 				options={{
-					title: 'Songs',
-					header: () => <Header title="Songs" />,
 					tabBarIcon: ({ color }) => <FontAwesome name="music" size={20} color={color} />,
+					headerShown: false,
 				}}
 			/>
 			<Tabs.Screen
 				name="playlists"
 				options={{
-					title: 'Playlists',
-					header: () => <Header title="Playlists" />,
 					tabBarIcon: ({ color }) => <FontAwesome name="list" size={20} color={color} />,
+					headerShown: false,
 				}}
 			/>
 			<Tabs.Screen
 				name="downloads"
 				options={{
-					title: 'Downloads',
-					header: () => <Header title="Downloads" />,
 					tabBarIcon: ({ color }) => <FontAwesome name="download" size={20} color={color} />,
+					headerShown: false,
 				}}
 			/>
 		</Tabs>

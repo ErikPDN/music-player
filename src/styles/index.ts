@@ -22,7 +22,7 @@ export const defaultStyles = StyleSheet.create({
 		color: colors.text,
 		fontWeight: 'bold',
 		marginBottom: 8,
-		marginTop: 42,
+		marginTop: 12,
 		marginHorizontal: 12,
 	},
 })

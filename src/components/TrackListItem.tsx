@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
 	},
 
 	trackArtistText: {
-		color: colors.textMuted,
+		color: '#666',
 		fontSize: 14,
 		fontWeight: '400',
 		marginTop: 4,
