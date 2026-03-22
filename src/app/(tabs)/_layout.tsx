@@ -23,6 +23,7 @@ const TabsNavigation = () => {
 					overflow: 'hidden',
 					height: 110,
 					opacity: 1,
+					paddingHorizontal: 12,
 				},
 				tabBarBackground: () => <BlurView intensity={30} style={styles.blurViewStyle} />,
 			}}
@@ -30,6 +31,7 @@ const TabsNavigation = () => {
 			<Tabs.Screen
 				name="favorites"
 				options={{
+					tabBarLabel: 'Favorites',
 					tabBarIcon: ({ color }) => <FontAwesome name="heart" size={20} color={color} />,
 					headerShown: false,
 				}}
@@ -37,6 +39,7 @@ const TabsNavigation = () => {
 			<Tabs.Screen
 				name="(songs)"
 				options={{
+					tabBarLabel: 'Songs',
 					tabBarIcon: ({ color }) => <FontAwesome name="music" size={20} color={color} />,
 					headerShown: false,
 				}}
@@ -44,13 +47,23 @@ const TabsNavigation = () => {
 			<Tabs.Screen
 				name="playlists"
 				options={{
+					tabBarLabel: 'Playlists',
 					tabBarIcon: ({ color }) => <FontAwesome name="list" size={20} color={color} />,
+					headerShown: false,
+				}}
+			/>
+			<Tabs.Screen
+				name="artists"
+				options={{
+					tabBarLabel: 'Artists',
+					tabBarIcon: ({ color }) => <FontAwesome name="users" size={20} color={color} />,
 					headerShown: false,
 				}}
 			/>
 			<Tabs.Screen
 				name="downloads"
 				options={{
+					tabBarLabel: 'Downloads',
 					tabBarIcon: ({ color }) => <FontAwesome name="download" size={20} color={color} />,
 					headerShown: false,
 				}}
