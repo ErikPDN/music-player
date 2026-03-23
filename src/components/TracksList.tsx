@@ -9,6 +9,7 @@ const TracksList = ({ ...props }: TrackListProps) => {
 		<FlatList
 			{...props}
 			data={library}
+			contentContainerStyle={{ paddingBottom: 120 }}
 			renderItem={({ item: track }) => (
 				<TrackListItem
 					track={{

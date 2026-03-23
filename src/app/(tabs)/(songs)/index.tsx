@@ -6,17 +6,13 @@ import { defaultStyles } from '@/styles'
 import { View } from 'react-native'
 
 const SongsScreen = () => {
-	const search = useNavigationSearch({
-		searchBarOptions: {
-			placeholder: 'Search songs',
-		},
-	})
+	const { search, setSearch } = useNavigationSearch()
 
 	return (
 		<View style={defaultStyles.container}>
 			<View>
 				<Header title="Songs" />
-				<SearchBar placeholder="Search songs" value={search} />
+				<SearchBar placeholder="Search songs..." value={search} onChangeText={setSearch} />
 			</View>
 
 			<TracksList scrollEnabled={true} />

@@ -26,5 +26,3 @@ export const defaultStyles = StyleSheet.create({
 		marginHorizontal: 12,
 	},
 })
-
-export const utilsStyles = StyleSheet.create({})
