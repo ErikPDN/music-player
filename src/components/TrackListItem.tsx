@@ -1,27 +1,24 @@
 import { unknownArtistImageSource } from '@/constants/images'
 import { colors } from '@/constants/tokens'
+import { Entypo } from '@expo/vector-icons'
 import { Image } from 'expo-image'
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
-
-interface Track {
-	title: string
-	image?: string
-	artist?: string
-}
+import { Track, useActiveTrack } from 'react-native-track-player'
 
 interface TrackListItemProps {
 	track: Track
+	onTrackPress?: (track: Track) => void
 }
 
-export const TrackListItem = ({ track }: TrackListItemProps) => {
-	const isActiveTrack = false
+export const TrackListItem = ({ track, onTrackPress }: TrackListItemProps) => {
+	const isActiveTrack = useActiveTrack()?.url === track.url
 
 	return (
-		<TouchableHighlight>
+		<TouchableHighlight onPress={() => onTrackPress?.(track)}>
 			<View style={styles.trackItemContainer}>
 				<View>
 					<Image
-						source={track.image || unknownArtistImageSource}
+						source={track.artwork || unknownArtistImageSource}
 						style={{
 							...styles.trackArtworkImage,
 							opacity: isActiveTrack ? 1 : 0.5,
@@ -29,21 +26,32 @@ export const TrackListItem = ({ track }: TrackListItemProps) => {
 					/>
 				</View>
 
-				<View style={{ width: '100%' }}>
-					<Text
-						style={{
-							...styles.trackTitleText,
-							color: isActiveTrack ? colors.primary : colors.text,
-						}}
-					>
-						{track.title}
-					</Text>
-
-					{track.artist && (
-						<Text numberOfLines={1} style={styles.trackArtistText}>
-							{track.artist}
+				<View
+					style={{
+						flex: 1,
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}
+				>
+					<View style={{ width: '100%' }}>
+						<Text
+							style={{
+								...styles.trackTitleText,
+								color: isActiveTrack ? colors.primary : colors.text,
+							}}
+						>
+							{track.title}
 						</Text>
-					)}
+
+						{track.artist && (
+							<Text numberOfLines={1} style={styles.trackArtistText}>
+								{track.artist}
+							</Text>
+						)}
+					</View>
+
+					<Entypo name="dots-three-vertical" />
 				</View>
 			</View>
 		</TouchableHighlight>
