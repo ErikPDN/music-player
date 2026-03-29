@@ -51,7 +51,7 @@ export const TrackListItem = ({ track, onTrackPress }: TrackListItemProps) => {
 						)}
 					</View>
 
-					<Entypo name="dots-three-vertical" />
+					<Entypo name="dots-three-vertical" size={20} color={colors.text} />
 				</View>
 			</View>
 		</TouchableHighlight>
@@ -85,5 +85,6 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		paddingVertical: 8,
 		paddingHorizontal: 12,
+		marginRight: 14,
 	},
 })

@@ -8,7 +8,7 @@ type TrackListProps = Partial<FlatListProps<Track>> & {
 
 const TracksList = ({ tracks, ...props }: TrackListProps) => {
 	const handleTrackPress = (track: Track) => {
-		console.log('Track pressed:', track.title)
+		console.log('Track pressed:', track)
 	}
 
 	return (
