@@ -26,3 +26,12 @@ export const defaultStyles = StyleSheet.create({
 		marginHorizontal: 12,
 	},
 })
+
+export const utilsStyles = StyleSheet.create({
+	emptyContentText: {
+		...defaultStyles.text,
+		color: colors.textMuted,
+		textAlign: 'center',
+		marginTop: 20,
+	},
+})

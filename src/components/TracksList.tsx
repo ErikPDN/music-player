@@ -1,14 +1,29 @@
-import { FlatList, FlatListProps } from 'react-native'
-import { Track } from 'react-native-track-player'
-import { TrackListItem } from './TrackListItem'
+import { TrackListItem } from '@/components/TrackListItem'
+import { utilsStyles } from '@/styles'
+import { FlatList, FlatListProps, Text, View } from 'react-native'
+import TrackPlayer, { Track } from 'react-native-track-player'
 
 type TrackListProps = Partial<FlatListProps<Track>> & {
 	tracks?: Track[]
 }
 
 const TracksList = ({ tracks, ...props }: TrackListProps) => {
-	const handleTrackPress = (track: Track) => {
-		console.log('Track pressed:', track)
+	const handleTrackPress = async (track: Track, index: number) => {
+		try {
+			const queue = await TrackPlayer.getQueue()
+
+			if (queue.length > 0 && queue[0].url === tracks?.[0].url) {
+				await TrackPlayer.skip(index)
+			} else {
+				await TrackPlayer.reset()
+				await TrackPlayer.add(tracks || [])
+				await TrackPlayer.skip(index)
+			}
+
+			await TrackPlayer.play()
+		} catch (error) {
+			console.error('Erro ao tocar faixa:', error)
+		}
 	}
 
 	return (
@@ -16,9 +31,14 @@ const TracksList = ({ tracks, ...props }: TrackListProps) => {
 			{...props}
 			data={tracks}
 			contentContainerStyle={{ paddingBottom: 120 }}
-			renderItem={({ item: track }) => (
-				<TrackListItem track={track} onTrackPress={handleTrackPress} />
+			renderItem={({ item: track, index }) => (
+				<TrackListItem track={track} onTrackPress={() => handleTrackPress(track, index)} />
 			)}
+			ListEmptyComponent={
+				<View>
+					<Text style={utilsStyles.emptyContentText}>No songs found</Text>
+				</View>
+			}
 		/>
 	)
 }

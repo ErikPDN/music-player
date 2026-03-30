@@ -1,18 +1,16 @@
 import { PlayPauseButton } from '@/components/PlayPauseButton'
 import { unknownTrackImageSource } from '@/constants/images'
+import { useLastActiveTrack } from '@/hooks/useLastActiveTrack'
 import { defaultStyles } from '@/styles'
 import { Image } from 'expo-image'
 import { StyleSheet, Text, TouchableOpacity, View, ViewProps } from 'react-native'
-import { Track, useActiveTrack } from 'react-native-track-player'
+import { useActiveTrack } from 'react-native-track-player'
 
 const FloatingPlayer = ({ style }: ViewProps) => {
 	const activeTrack = useActiveTrack()
+	const lastActiveTrack = useLastActiveTrack()
 
-	const displayedTrack: Track | undefined = activeTrack && {
-		title: 'Unknown Title',
-		artist: 'Unknown Artist',
-		...activeTrack,
-	}
+	const displayedTrack = activeTrack ?? lastActiveTrack
 
 	if (!displayedTrack) {
 		return null
@@ -20,7 +18,10 @@ const FloatingPlayer = ({ style }: ViewProps) => {
 
 	return (
 		<TouchableOpacity style={[styles.container, style]} activeOpacity={0.8}>
-			<Image source={displayedTrack ?? unknownTrackImageSource} style={styles.trackArtworkImage} />
+			<Image
+				source={displayedTrack.artwork ?? unknownTrackImageSource}
+				style={styles.trackArtworkImage}
+			/>
 
 			<View style={styles.trackInfoContainer}>
 				<Text style={styles.trackTitle}>{displayedTrack.title}</Text>
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		justifyContent: 'center',
 		paddingLeft: 10,
-		marginLeft: 10,
+		marginLeft: 4,
 	},
 
 	trackArtworkImage: {
