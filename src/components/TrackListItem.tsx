@@ -4,6 +4,7 @@ import { Entypo } from '@expo/vector-icons'
 import { Image } from 'expo-image'
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
 import { Track, useActiveTrack } from 'react-native-track-player'
+import PlayingEqualizerIcon from './PlayingEqualizerIcon'
 
 interface TrackListItemProps {
 	track: Track
@@ -41,6 +42,7 @@ export const TrackListItem = ({ track, onTrackPress }: TrackListItemProps) => {
 								color: isActiveTrack ? colors.primary : colors.text,
 							}}
 						>
+							{isActiveTrack && <PlayingEqualizerIcon />}
 							{track.title}
 						</Text>
 
