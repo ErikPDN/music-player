@@ -15,7 +15,11 @@ export const TrackListItem = ({ track, onTrackPress }: TrackListItemProps) => {
 	const isActiveTrack = useActiveTrack()?.url === track.url
 
 	return (
-		<TouchableHighlight onPress={() => onTrackPress?.(track)}>
+		<TouchableHighlight
+			onPress={() => onTrackPress?.(track)}
+			underlayColor="rgba(156, 163, 175, 0.3)"
+			style={styles.touchable}
+		>
 			<View style={styles.trackItemContainer}>
 				<View>
 					<Image
@@ -61,6 +65,10 @@ export const TrackListItem = ({ track, onTrackPress }: TrackListItemProps) => {
 }
 
 const styles = StyleSheet.create({
+	touchable: {
+		borderRadius: 8,
+		marginHorizontal: 4,
+	},
 	trackArtworkImage: {
 		width: 50,
 		height: 50,

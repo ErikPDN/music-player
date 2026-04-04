@@ -10,16 +10,15 @@ const PlayingEqualizerIcon = () => {
 	const animateBar = (bar: Animated.Value, duration: number, delay: number) => {
 		Animated.loop(
 			Animated.sequence([
+				Animated.delay(delay),
 				Animated.timing(bar, {
 					toValue: 1,
 					duration,
-					delay,
 					useNativeDriver: true,
 				}),
 				Animated.timing(bar, {
 					toValue: 0.2,
 					duration,
-					delay,
 					useNativeDriver: true,
 				}),
 			]),
@@ -30,7 +29,13 @@ const PlayingEqualizerIcon = () => {
 		animateBar(bar1, 400, 0)
 		animateBar(bar2, 450, 150)
 		animateBar(bar3, 350, 80)
-	})
+
+		return () => {
+			bar1.stopAnimation()
+			bar2.stopAnimation()
+			bar3.stopAnimation()
+		}
+	}, [])
 
 	return (
 		<View style={styles.container}>
