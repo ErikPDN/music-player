@@ -1,9 +1,9 @@
 import { unknownArtistImageSource } from '@/constants/images'
 import { colors } from '@/constants/tokens'
-import { Entypo } from '@expo/vector-icons'
+import { Entypo, Ionicons } from '@expo/vector-icons'
 import { Image } from 'expo-image'
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
-import { Track, useActiveTrack } from 'react-native-track-player'
+import { Track, useActiveTrack, useIsPlaying } from 'react-native-track-player'
 import PlayingEqualizerIcon from './PlayingEqualizerIcon'
 
 interface TrackListItemProps {
@@ -13,6 +13,7 @@ interface TrackListItemProps {
 
 export const TrackListItem = ({ track, onTrackPress }: TrackListItemProps) => {
 	const isActiveTrack = useActiveTrack()?.url === track.url
+	const { playing } = useIsPlaying()
 
 	return (
 		<TouchableHighlight
@@ -29,6 +30,14 @@ export const TrackListItem = ({ track, onTrackPress }: TrackListItemProps) => {
 							opacity: isActiveTrack ? 1 : 0.5,
 						}}
 					/>
+					{isActiveTrack && !playing && (
+						<Ionicons
+							style={styles.trackPlayingIconIdicator}
+							name="play"
+							size={26}
+							color={colors.primary}
+						/>
+					)}
 				</View>
 
 				<View
@@ -45,16 +54,15 @@ export const TrackListItem = ({ track, onTrackPress }: TrackListItemProps) => {
 								...styles.trackTitleText,
 								color: isActiveTrack ? colors.primary : colors.text,
 							}}
+							numberOfLines={1}
 						>
-							{isActiveTrack && <PlayingEqualizerIcon />}
+							{isActiveTrack && playing && <PlayingEqualizerIcon />}
 							{track.title}
 						</Text>
 
-						{track.artist && (
-							<Text numberOfLines={1} style={styles.trackArtistText}>
-								{track.artist}
-							</Text>
-						)}
+						<Text numberOfLines={1} style={styles.trackArtistText}>
+							{track.artist ?? 'Unknown Artist'}
+						</Text>
 					</View>
 
 					<Entypo name="dots-three-vertical" size={20} color={colors.text} />
@@ -96,5 +104,11 @@ const styles = StyleSheet.create({
 		paddingVertical: 8,
 		paddingHorizontal: 12,
 		marginRight: 16,
+	},
+
+	trackPlayingIconIdicator: {
+		position: 'absolute',
+		top: 12,
+		left: 12,
 	},
 })

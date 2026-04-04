@@ -1,14 +1,20 @@
 import { PlayPauseButton } from '@/components/PlayPauseButton'
+import { PIXELS_PER_CHAR } from '@/constants/animation'
 import { unknownTrackImageSource } from '@/constants/images'
 import { useLastActiveTrack } from '@/hooks/useLastActiveTrack'
 import { defaultStyles } from '@/styles'
 import { Image } from 'expo-image'
-import { StyleSheet, Text, TouchableOpacity, View, ViewProps } from 'react-native'
+import { useState } from 'react'
+import { StyleSheet, TouchableOpacity, View, ViewProps } from 'react-native'
 import { useActiveTrack } from 'react-native-track-player'
+import MovingText from './MovingText'
 
 const FloatingPlayer = ({ style }: ViewProps) => {
+	const [containerWidth, setContainerWidth] = useState(0)
+
 	const activeTrack = useActiveTrack()
 	const lastActiveTrack = useLastActiveTrack()
+	const threshold = Math.floor(containerWidth / PIXELS_PER_CHAR)
 
 	const displayedTrack = activeTrack ?? lastActiveTrack
 
@@ -23,9 +29,20 @@ const FloatingPlayer = ({ style }: ViewProps) => {
 				style={styles.trackArtworkImage}
 			/>
 
-			<View style={styles.trackInfoContainer}>
-				<Text style={styles.trackTitle}>{displayedTrack.title}</Text>
-				<Text style={styles.trackArtist}>{displayedTrack.artist}</Text>
+			<View
+				style={styles.trackInfoContainer}
+				onLayout={(e) => setContainerWidth(e.nativeEvent.layout.width)}
+			>
+				<MovingText
+					style={styles.trackTitle}
+					text={displayedTrack.title ?? 'Unknown Title'}
+					animationThreshold={threshold}
+				/>
+				<MovingText
+					style={styles.trackArtist}
+					text={displayedTrack.artist ?? 'Unknown Artist'}
+					animationThreshold={threshold}
+				/>
 			</View>
 
 			<View style={styles.trackControlsContainer}>
@@ -52,6 +69,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		paddingLeft: 10,
 		marginLeft: 4,
+		overflow: 'hidden',
 	},
 
 	trackArtworkImage: {
