@@ -6,7 +6,7 @@ import { useNavigationSearch } from '@/hooks/useNavigationSearch'
 import { defaultStyles } from '@/styles'
 import library from '@assets/data/library.json'
 import { useMemo } from 'react'
-import { View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 const SongsScreen = () => {
 	const { search, setSearch } = useNavigationSearch()
@@ -17,7 +17,7 @@ const SongsScreen = () => {
 	}, [search])
 
 	return (
-		<View style={defaultStyles.container}>
+		<View style={styles.overlayContainer}>
 			<View>
 				<Header title="Songs" />
 				<SearchBar placeholder="Search songs..." value={search} onChangeText={setSearch} />
@@ -27,5 +27,12 @@ const SongsScreen = () => {
 		</View>
 	)
 }
+
+const styles = StyleSheet.create({
+	overlayContainer: {
+		...defaultStyles.container,
+		paddingHorizontal: 6,
+	},
+})
 
 export default SongsScreen
