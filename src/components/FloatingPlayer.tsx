@@ -4,12 +4,14 @@ import { unknownTrackImageSource } from '@/constants/images'
 import { useLastActiveTrack } from '@/hooks/useLastActiveTrack'
 import { defaultStyles } from '@/styles'
 import { Image } from 'expo-image'
+import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import { StyleSheet, TouchableOpacity, View, ViewProps } from 'react-native'
 import { useActiveTrack } from 'react-native-track-player'
 import MovingText from './MovingText'
 
 const FloatingPlayer = ({ style }: ViewProps) => {
+	const router = useRouter()
 	const [containerWidth, setContainerWidth] = useState(0)
 
 	const activeTrack = useActiveTrack()
@@ -22,8 +24,12 @@ const FloatingPlayer = ({ style }: ViewProps) => {
 		return null
 	}
 
+	const handlePress = () => {
+		router.push('/player')
+	}
+
 	return (
-		<TouchableOpacity style={[styles.container, style]} activeOpacity={0.8}>
+		<TouchableOpacity onPress={handlePress} style={[styles.container, style]} activeOpacity={0.8}>
 			<Image
 				source={displayedTrack.artwork ?? unknownTrackImageSource}
 				style={styles.trackArtworkImage}
