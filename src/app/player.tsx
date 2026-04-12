@@ -1,4 +1,8 @@
-import { PlayPauseButton } from '@/components/PlayPauseButton'
+import { PlayerPlayPauseButton } from '@/components/PlayerPlayPauseButton'
+import { RepeatButton } from '@/components/RepeatButton'
+import SeekBar from '@/components/SeekBar'
+import { ShuffleButton } from '@/components/ShuffleButton'
+import { SkipNextButton, SkipPreviousButton } from '@/components/SkipButton'
 import { unknownArtistImageSource } from '@/constants/images'
 import { colors, screenPadding } from '@/constants/tokens'
 import { defaultStyles } from '@/styles'
@@ -15,8 +19,8 @@ const PlayerScreen = () => {
 	const activeTrack = useActiveTrack()
 	const { top, bottom } = useSafeAreaInsets()
 
-	const [isShuffleActive, setIsShuffleActive] = useState(false)
-	const [isRepeatActive, setIsRepeatActive] = useState(false)
+	// TODO: Implement actual like functionality
+	const [isLiked, setIsLiked] = useState(false)
 
 	const handleOnPress = () => {
 		router.back()
@@ -38,7 +42,7 @@ const PlayerScreen = () => {
 				style={[
 					styles.cardContainer,
 					{
-						marginTop: top + 30,
+						marginTop: top + 10,
 						marginBottom: bottom,
 					},
 				]}
@@ -50,41 +54,46 @@ const PlayerScreen = () => {
 					/>
 				</View>
 
-				<View style={{ flex: 1, marginTop: 24 }}>
-					<Text numberOfLines={1} style={styles.trackTitleText}>
-						{activeTrack.title}
-					</Text>
-					<Text numberOfLines={1} style={styles.trackArtistText}>
-						{activeTrack.artist || 'Unknown Artist'}
-					</Text>
+				<View
+					style={{
+						marginTop: 12,
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						alignItems: 'center',
+					}}
+				>
+					<View style={{ flexDirection: 'column', maxWidth: '75%' }}>
+						<Text numberOfLines={1} style={styles.trackTitleText}>
+							{activeTrack.title}
+						</Text>
+						<Text numberOfLines={1} style={styles.trackArtistText}>
+							{activeTrack.artist || 'Unknown Artist'}
+						</Text>
+					</View>
+
+					<TouchableOpacity onPress={() => setIsLiked((prev) => !prev)} style={styles.likeButton}>
+						<FontAwesome name="heart" size={26} color={isLiked ? colors.primary : colors.icon} />
+					</TouchableOpacity>
+				</View>
+
+				<View style={styles.seekContainer}>
+					<SeekBar />
 				</View>
 
 				<View style={styles.trackControlsContainer}>
-					<TouchableOpacity
-						style={{ paddingHorizontal: 16 }}
-						onPress={() => setIsShuffleActive((prev) => !prev)}
-					>
-						<FontAwesome name="random" size={28} color={isShuffleActive ? '#e53935' : 'white'} />
-					</TouchableOpacity>
+					<ShuffleButton iconSize={28} />
 
-					<TouchableOpacity>
-						<FontAwesome name="backward" size={28} color="white" />
-					</TouchableOpacity>
+					<SkipPreviousButton iconSize={28} />
 
-					<TouchableOpacity style={styles.playPauseButtonContainer}>
-						<PlayPauseButton iconSize={24} iconColor="black" />
-					</TouchableOpacity>
+					<PlayerPlayPauseButton
+						iconSize={26}
+						iconColor="black"
+						style={styles.playPauseButtonContainer}
+					/>
 
-					<TouchableOpacity>
-						<FontAwesome name="forward" size={28} color="white" />
-					</TouchableOpacity>
+					<SkipNextButton iconSize={28} />
 
-					<TouchableOpacity
-						style={{ paddingHorizontal: 16 }}
-						onPress={() => setIsRepeatActive((prev) => !prev)}
-					>
-						<FontAwesome name="repeat" size={28} color={isRepeatActive ? '#e53935' : 'white'} />
-					</TouchableOpacity>
+					<RepeatButton iconSize={28} />
 				</View>
 			</View>
 		</View>
@@ -116,6 +125,10 @@ const styles = StyleSheet.create({
 		height: '55%',
 	},
 
+	seekContainer: {
+		marginTop: 48,
+	},
+
 	artworkImage: {
 		width: '100%',
 		height: '100%',
@@ -125,7 +138,7 @@ const styles = StyleSheet.create({
 
 	trackTitleText: {
 		color: colors.text,
-		fontSize: 24,
+		fontSize: 20,
 		fontWeight: '700',
 		width: '100%',
 	},
@@ -140,8 +153,8 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
-		gap: 16,
-		flex: 1,
+		gap: 26,
+		marginTop: 16,
 		paddingBottom: 16,
 	},
 
@@ -150,6 +163,13 @@ const styles = StyleSheet.create({
 		height: 64,
 		borderRadius: 999,
 		backgroundColor: 'white',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+
+	likeButton: {
+		width: 40,
+		height: 40,
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
