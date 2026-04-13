@@ -21,7 +21,6 @@ const PlayerScreen = () => {
 	const activeTrack = useActiveTrack()
 	const { top, bottom } = useSafeAreaInsets()
 	const { imageColors } = usePlayerBackground(activeTrack?.artwork ?? unknownTrackImageSource)
-	console.log('Image colors: ', imageColors)
 
 	// TODO: Implement actual like functionality
 	const [isLiked, setIsLiked] = useState(false)
