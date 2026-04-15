@@ -61,6 +61,7 @@ const PlayerScreen = () => {
 					<View style={styles.artworkImageContainer}>
 						<Image
 							source={activeTrack.artwork ?? unknownArtistImageSource}
+							contentFit="cover"
 							style={styles.artworkImage}
 						/>
 					</View>
@@ -143,7 +144,6 @@ const styles = StyleSheet.create({
 	artworkImage: {
 		width: '100%',
 		height: '100%',
-		resizeMode: 'cover',
 		borderRadius: 12,
 	},
 

@@ -12,7 +12,12 @@ const TracksList = ({ tracks, ...props }: TrackListProps) => {
 		try {
 			const queue = await TrackPlayer.getQueue()
 
-			if (queue.length > 0 && queue[0].url === tracks?.[0].url) {
+			const isSameQueue =
+				queue.length === tracks?.length &&
+				queue[0]?.url === tracks?.[0]?.url &&
+				queue[queue.length - 1]?.url === tracks?.[tracks.length - 1]?.url
+
+			if (isSameQueue) {
 				await TrackPlayer.skip(index)
 			} else {
 				await TrackPlayer.reset()
