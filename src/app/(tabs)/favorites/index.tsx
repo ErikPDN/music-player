@@ -3,19 +3,20 @@ import SearchBar from '@/components/SearchBar'
 import TracksList from '@/components/TracksList'
 import { filterSongs } from '@/helpers/filter'
 import { useNavigationSearch } from '@/hooks/useNavigationSearch'
+import { useFavorites } from '@/store/useFavorites'
 import { defaultStyles } from '@/styles'
-import library from '@assets/data/library.json'
 import { useMemo } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 const FavoritesScreen = () => {
 	const { search, setSearch } = useNavigationSearch()
 
-	const likedTracks = useMemo(() => {
-		const favorites = library.filter((song) => song.rating)
-		if (!search) return favorites
-		return favorites.filter(filterSongs(search))
-	}, [search])
+	const { favorites } = useFavorites()
+
+	const filteredFavorites = useMemo(
+		() => favorites.filter(filterSongs(search)),
+		[favorites, search],
+	)
 
 	return (
 		<View style={styles.overlayContainer}>
@@ -24,11 +25,11 @@ const FavoritesScreen = () => {
 				<SearchBar placeholder="Search songs..." value={search} onChangeText={setSearch} />
 			</View>
 
-			{search && likedTracks.length === 0 && (
+			{search && filteredFavorites.length === 0 && (
 				<Text style={styles.emptyText}>No songs found matching</Text>
 			)}
 
-			<TracksList tracks={likedTracks} scrollEnabled={true} />
+			<TracksList tracks={filteredFavorites} scrollEnabled={true} />
 		</View>
 	)
 }
