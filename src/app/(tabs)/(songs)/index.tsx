@@ -3,18 +3,20 @@ import SearchBar from '@/components/SearchBar'
 import TracksList from '@/components/TracksList'
 import { filterSongs } from '@/helpers/filter'
 import { useNavigationSearch } from '@/hooks/useNavigationSearch'
+import { useTracks } from '@/store/useTracks'
 import { defaultStyles } from '@/styles'
-import library from '@assets/data/library.json'
 import { useMemo } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 const SongsScreen = () => {
 	const { search, setSearch } = useNavigationSearch()
 
+	const tracks = useTracks()
+
 	const filteredTracks = useMemo(() => {
-		if (!search) return library
-		return library.filter(filterSongs(search))
-	}, [search])
+		if (!search) return tracks
+		return tracks.filter(filterSongs(search))
+	}, [search, tracks])
 
 	return (
 		<View style={styles.overlayContainer}>
