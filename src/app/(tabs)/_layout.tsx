@@ -21,13 +21,13 @@ const TabsNavigation = () => {
 						paddingTop: 10,
 						paddingBottom: 40,
 						elevation: 0,
-						backgroundColor: colors.background,
+						backgroundColor: 'rgba(0, 0, 0, 0.8)',
 						overflow: 'hidden',
 						height: 110,
 						opacity: 1,
 						paddingHorizontal: 12,
 					},
-					tabBarBackground: () => <BlurView intensity={30} style={styles.blurViewStyle} />,
+					tabBarBackground: () => <BlurView intensity={60} style={styles.blurViewStyle} />,
 				}}
 			>
 				<Tabs.Screen
@@ -77,7 +77,7 @@ const TabsNavigation = () => {
 					position: 'absolute',
 					left: 8,
 					right: 8,
-					bottom: 112,
+					bottom: 110,
 				}}
 			/>
 		</>
@@ -85,12 +85,7 @@ const TabsNavigation = () => {
 }
 
 const styles = StyleSheet.create({
-	blurViewStyle: {
-		...StyleSheet.absoluteFill,
-		overflow: 'hidden',
-		borderTopLeftRadius: 20,
-		borderTopRightRadius: 20,
-	},
+	blurViewStyle: {},
 })
 
 export default TabsNavigation
