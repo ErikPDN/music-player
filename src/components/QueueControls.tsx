@@ -5,22 +5,28 @@ import { Track } from 'react-native-track-player'
 
 type QueueControlsProps = {
 	tracks: Track[]
-	handlePlay: () => void
-	handleShuffle: () => void
+	handlePlay?: () => void
+	handleShuffle?: () => void
 } & ViewProps
 
-export const QueueControls = ({ tracks, style, ...viewProps }: QueueControlsProps) => {
+export const QueueControls = ({
+	tracks,
+	style,
+	handlePlay,
+	handleShuffle,
+	...viewProps
+}: QueueControlsProps) => {
 	return (
-		<View>
+		<View style={[{ flexDirection: 'row', columnGap: 8 }, style]} {...viewProps}>
 			<View style={{ flex: 1 }}>
-				<TouchableOpacity onPress={() => {}} activeOpacity={0.8} style={styles.button}>
+				<TouchableOpacity onPress={handlePlay} activeOpacity={0.8} style={styles.button}>
 					<FontAwesome name="play" size={16} color={colors.primary} />
 					<Text style={styles.buttonText}>Play</Text>
 				</TouchableOpacity>
 			</View>
 
 			<View style={{ flex: 1 }}>
-				<TouchableOpacity onPress={() => {}} activeOpacity={0.8} style={styles.button}>
+				<TouchableOpacity onPress={handleShuffle} activeOpacity={0.8} style={styles.button}>
 					<FontAwesome name="random" size={16} color={colors.primary} />
 					<Text style={styles.buttonText}>Shuffle</Text>
 				</TouchableOpacity>
