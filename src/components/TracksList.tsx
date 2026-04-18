@@ -35,7 +35,7 @@ const TracksList = ({ tracks, ...props }: TrackListProps) => {
 		<FlatList
 			{...props}
 			data={tracks}
-			contentContainerStyle={{ paddingBottom: 120 }}
+			contentContainerStyle={{ paddingBottom: 175 }}
 			renderItem={({ item: track, index }) => (
 				<TrackListItem track={track} onTrackPress={() => handleTrackPress(track, index)} />
 			)}
