@@ -31,18 +31,18 @@ const TabsNavigation = () => {
 				}}
 			>
 				<Tabs.Screen
-					name="favorites"
-					options={{
-						tabBarLabel: 'Favorites',
-						tabBarIcon: ({ color }) => <FontAwesome name="heart" size={20} color={color} />,
-						headerShown: false,
-					}}
-				/>
-				<Tabs.Screen
 					name="(songs)"
 					options={{
 						tabBarLabel: 'Songs',
 						tabBarIcon: ({ color }) => <FontAwesome name="music" size={20} color={color} />,
+						headerShown: false,
+					}}
+				/>
+				<Tabs.Screen
+					name="search"
+					options={{
+						tabBarLabel: 'Search',
+						tabBarIcon: ({ color }) => <FontAwesome name="search" size={20} color={color} />,
 						headerShown: false,
 					}}
 				/>

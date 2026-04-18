@@ -1,42 +1,38 @@
 import Header from '@/components/Header'
-import { QueueControls } from '@/components/QueueControls'
+import SearchBar from '@/components/SearchBar'
 import TracksList from '@/components/TracksList'
 import { filterSongs } from '@/helpers/filter'
 import { useNavigationSearch } from '@/hooks/useNavigationSearch'
-import { useQueueControls } from '@/hooks/useQueueControls'
 import { useTracks } from '@/store/useTracks'
 import { defaultStyles } from '@/styles'
 import { useMemo } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const SongsScreen = () => {
+const SearchScreen = () => {
 	const { search, setSearch } = useNavigationSearch()
 
 	const tracks = useTracks()
 
 	const filteredTracks = useMemo(() => {
-		if (!search) return tracks
+		if (!search) return []
+
 		return tracks.filter(filterSongs(search))
 	}, [search, tracks])
 
-	const { handlePlay, handleShuffle } = useQueueControls(tracks)
-
 	return (
-		<View style={styles.overlayContainer}>
+		<View style={defaultStyles.container}>
 			<View>
-				<Header title="Songs" />
+				<Header title="Search" isSearchable={false} />
+				<SearchBar
+					placeholder="What do you want to listen to?"
+					value={search}
+					onChangeText={setSearch}
+				/>
+
+				{search && filteredTracks.length === 0 && (
+					<Text style={styles.emptyText}>No songs found matching "{search}"</Text>
+				)}
 			</View>
-
-			<QueueControls
-				tracks={tracks}
-				style={{ marginHorizontal: 12 }}
-				handlePlay={handlePlay}
-				handleShuffle={handleShuffle}
-			/>
-
-			{search && filteredTracks.length === 0 && (
-				<Text style={styles.emptyText}>No songs found matching "{search}"</Text>
-			)}
 
 			<TracksList tracks={filteredTracks} scrollEnabled={true} />
 		</View>
@@ -56,4 +52,4 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default SongsScreen
+export default SearchScreen
