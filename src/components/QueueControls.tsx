@@ -23,13 +23,13 @@ export const QueueControls = ({
 		>
 			<View>
 				<TouchableOpacity onPress={handlePlay} activeOpacity={0.8} style={styles.button}>
-					<FontAwesome name="play" size={24} color={colors.text} />
+					<FontAwesome name="play" size={20} color={colors.text} />
 				</TouchableOpacity>
 			</View>
 
 			<View>
 				<TouchableOpacity onPress={handleShuffle} activeOpacity={0.8} style={styles.button}>
-					<FontAwesome name="random" size={24} color={colors.text} />
+					<FontAwesome name="random" size={20} color={colors.text} />
 				</TouchableOpacity>
 			</View>
 		</View>
@@ -38,7 +38,7 @@ export const QueueControls = ({
 
 const styles = StyleSheet.create({
 	button: {
-		backgroundColor: 'rgba(252, 60, 68, 0.85)',
+		backgroundColor: colors.primary,
 		padding: 4,
 		borderRadius: 999,
 		width: 56,

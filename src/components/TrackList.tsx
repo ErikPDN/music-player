@@ -7,7 +7,7 @@ type TrackListProps = Partial<FlatListProps<Track>> & {
 	tracks?: Track[]
 }
 
-const TracksList = ({ tracks, ...props }: TrackListProps) => {
+const TrackList = ({ tracks, ...props }: TrackListProps) => {
 	const handleTrackPress = async (track: Track, index: number) => {
 		try {
 			const queue = await TrackPlayer.getQueue()
@@ -48,4 +48,4 @@ const TracksList = ({ tracks, ...props }: TrackListProps) => {
 	)
 }
 
-export default TracksList
+export default TrackList

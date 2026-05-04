@@ -75,7 +75,6 @@ export const TrackListItem = ({ track, onTrackPress }: TrackListItemProps) => {
 const styles = StyleSheet.create({
 	touchable: {
 		borderRadius: 8,
-		marginHorizontal: 4,
 	},
 	trackArtworkImage: {
 		width: 50,

@@ -8,7 +8,9 @@ const defaultSearchOptions: SearchBarProps = {
 	hideWhenScrolling: false,
 }
 
-export const useNavigationSearch = () => {
+export const useNavigationSearch = ({
+	searchBarOptions,
+}: { searchBarOptions?: SearchBarProps } = {}) => {
 	const [search, setSearch] = useState('')
 	const navigation = useNavigation()
 
@@ -16,6 +18,7 @@ export const useNavigationSearch = () => {
 		navigation.setOptions({
 			headerSearchBarOptions: {
 				...defaultSearchOptions,
+				...searchBarOptions,
 				onChangeText: ({ nativeEvent: { text } }: { nativeEvent: { text: string } }) =>
 					setSearch(text),
 			},

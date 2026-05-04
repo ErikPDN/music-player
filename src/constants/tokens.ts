@@ -1,5 +1,5 @@
 export const colors = {
-	primary: '#fc3c44',
+	primary: '#FF0000',
 	background: '#000',
 	text: '#fff',
 	textMuted: '#9ca43af',
@@ -18,5 +18,5 @@ export const fontSize = {
 }
 
 export const screenPadding = {
-	horizontal: 24,
+	horizontal: 2,
 }

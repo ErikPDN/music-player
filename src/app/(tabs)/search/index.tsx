@@ -1,6 +1,6 @@
 import Header from '@/components/Header'
 import SearchBar from '@/components/SearchBar'
-import TracksList from '@/components/TracksList'
+import TracksList from '@/components/TrackList'
 import { filterSongs } from '@/helpers/filter'
 import { useNavigationSearch } from '@/hooks/useNavigationSearch'
 import { useTracks } from '@/store/useTracks'

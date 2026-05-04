@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native'
-import { colors, fontSize } from '../constants/tokens'
+import { colors, fontSize, screenPadding } from '../constants/tokens'
 
 export const defaultStyles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: colors.background,
-		paddingHorizontal: 6,
+		paddingHorizontal: screenPadding.horizontal,
 	},
 	text: {
 		fontSize: fontSize.md,

@@ -4,7 +4,7 @@ import SeekBar from '@/components/SeekBar'
 import { ShuffleButton } from '@/components/ShuffleButton'
 import { SkipNextButton, SkipPreviousButton } from '@/components/SkipButton'
 import { unknownArtistImageSource, unknownTrackImageSource } from '@/constants/images'
-import { colors, screenPadding } from '@/constants/tokens'
+import { colors } from '@/constants/tokens'
 import { usePlayerBackground } from '@/hooks/usePlayerBackground'
 import { defaultStyles } from '@/styles'
 import { FontAwesome, FontAwesome6 } from '@expo/vector-icons'
@@ -47,7 +47,7 @@ const PlayerScreen = () => {
 			}
 		>
 			<View style={styles.overlayContainer}>
-				<FontAwesome6 name="chevron-down" size={24} color="white" onPress={handleOnPress} />
+				<FontAwesome6 name="arrow-left" size={24} color="white" onPress={handleOnPress} />
 
 				<View
 					style={[
@@ -116,7 +116,7 @@ const PlayerScreen = () => {
 const styles = StyleSheet.create({
 	overlayContainer: {
 		flex: 1,
-		paddingHorizontal: screenPadding.horizontal,
+		paddingHorizontal: 24,
 		paddingTop: 72,
 	},
 

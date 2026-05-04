@@ -1,9 +1,8 @@
 import Header from '@/components/Header'
 import { QueueControls } from '@/components/QueueControls'
-import TracksList from '@/components/TracksList'
+import TracksList from '@/components/TrackList'
 import { filterSongs } from '@/helpers/filter'
 import { useNavigationSearch } from '@/hooks/useNavigationSearch'
-import { useQueueControls } from '@/hooks/useQueueControls'
 import { useTracks } from '@/store/useTracks'
 import { defaultStyles } from '@/styles'
 import { useMemo } from 'react'
@@ -19,20 +18,13 @@ const SongsScreen = () => {
 		return tracks.filter(filterSongs(search))
 	}, [search, tracks])
 
-	const { handlePlay, handleShuffle } = useQueueControls(tracks)
-
 	return (
 		<View style={styles.overlayContainer}>
 			<View>
 				<Header title="Songs" />
 			</View>
 
-			<QueueControls
-				tracks={tracks}
-				style={{ marginHorizontal: 12 }}
-				handlePlay={handlePlay}
-				handleShuffle={handleShuffle}
-			/>
+			<QueueControls tracks={tracks} style={{ marginHorizontal: 12 }} />
 
 			{search && filteredTracks.length === 0 && (
 				<Text style={styles.emptyText}>No songs found matching "{search}"</Text>
