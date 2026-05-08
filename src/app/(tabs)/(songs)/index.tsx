@@ -1,6 +1,8 @@
 import Header from '@/components/Header'
-import { QueueControls } from '@/components/QueueControls'
+import { PlayerPlayPauseButton } from '@/components/PlayerPlayPauseButton'
+import { ShuffleButton } from '@/components/ShuffleButton'
 import TracksList from '@/components/TrackList'
+import { colors } from '@/constants/tokens'
 import { filterSongs } from '@/helpers/filter'
 import { useNavigationSearch } from '@/hooks/useNavigationSearch'
 import { useTracks } from '@/store/useTracks'
@@ -24,7 +26,15 @@ const SongsScreen = () => {
 				<Header title="Songs" />
 			</View>
 
-			<QueueControls tracks={tracks} style={{ marginHorizontal: 12 }} />
+			<View style={styles.queueControlsContainer}>
+				<PlayerPlayPauseButton
+					iconSize={20}
+					iconColor={colors.text}
+					style={styles.playPauseButtonContainer}
+				/>
+
+				<ShuffleButton iconSize={20} style={styles.shuffleButtonContainer} />
+			</View>
 
 			{search && filteredTracks.length === 0 && (
 				<Text style={styles.emptyText}>No songs found matching "{search}"</Text>
@@ -45,6 +55,31 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		marginTop: 32,
 		fontSize: 16,
+	},
+
+	queueControlsContainer: {
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+		columnGap: 8,
+		paddingRight: 12,
+	},
+
+	playPauseButtonContainer: {
+		width: 50,
+		height: 50,
+		borderRadius: 999,
+		backgroundColor: colors.primary,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+
+	shuffleButtonContainer: {
+		width: 50,
+		height: 50,
+		borderRadius: 999,
+		backgroundColor: colors.primary,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 })
 

@@ -93,7 +93,7 @@ const PlayerScreen = () => {
 					</View>
 
 					<View style={styles.trackControlsContainer}>
-						<ShuffleButton iconSize={28} />
+						<ShuffleButton iconSize={28} showActiveColor={true} />
 
 						<SkipPreviousButton iconSize={28} />
 
