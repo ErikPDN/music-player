@@ -22,6 +22,7 @@ export const ArtistItem = ({ artist, ...rest }: ArtistItemProps) => {
 					<Text numberOfLines={1} style={styles.artistNameText}>
 						{artist.name}
 					</Text>
+					<Text style={styles.artistText}>Artist</Text>
 				</View>
 			</View>
 		</TouchableHighlight>
@@ -46,13 +47,20 @@ const styles = StyleSheet.create({
 	},
 
 	artistImage: {
-		width: 40,
-		height: 40,
-		borderRadius: 32,
+		width: 56,
+		height: 56,
+		borderRadius: 999,
+	},
+
+	artistText: {
+		color: '#666',
+		fontSize: 14,
+		fontWeight: '400',
+		marginTop: 2,
 	},
 
 	artistNameText: {
-		fontSize: 17,
+		fontSize: 16,
 		maxWidth: '80%',
 		color: colors.text,
 		fontWeight: '600',

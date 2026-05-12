@@ -5,13 +5,14 @@ import TracksList from '@/components/TrackList'
 import { colors } from '@/constants/tokens'
 import { filterSongs } from '@/helpers/filter'
 import { useNavigationSearch } from '@/hooks/useNavigationSearch'
+import { useQueuePlay } from '@/hooks/useQueuePlay'
 import { useTracks } from '@/store/useTracks'
 import { defaultStyles } from '@/styles'
 import { useMemo } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 const SongsScreen = () => {
-	const { search, setSearch } = useNavigationSearch()
+	const { search } = useNavigationSearch()
 
 	const tracks = useTracks()
 
@@ -20,6 +21,8 @@ const SongsScreen = () => {
 		return tracks.filter(filterSongs(search))
 	}, [search, tracks])
 
+	const handlePlay = useQueuePlay(filteredTracks)
+
 	return (
 		<View style={styles.overlayContainer}>
 			<View>
@@ -27,13 +30,13 @@ const SongsScreen = () => {
 			</View>
 
 			<View style={styles.queueControlsContainer}>
+				<ShuffleButton iconSize={20} style={styles.shuffleButtonContainer} />
 				<PlayerPlayPauseButton
 					iconSize={20}
 					iconColor={colors.text}
 					style={styles.playPauseButtonContainer}
+					onPlay={handlePlay}
 				/>
-
-				<ShuffleButton iconSize={20} style={styles.shuffleButtonContainer} />
 			</View>
 
 			{search && filteredTracks.length === 0 && (

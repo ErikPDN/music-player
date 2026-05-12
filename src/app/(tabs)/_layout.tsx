@@ -25,7 +25,6 @@ const TabsNavigation = () => {
 						overflow: 'hidden',
 						height: 110,
 						opacity: 1,
-						paddingHorizontal: 12,
 					},
 					tabBarBackground: () => <BlurView intensity={60} style={styles.blurViewStyle} />,
 				}}

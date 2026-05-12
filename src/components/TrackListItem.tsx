@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
 		columnGap: 12,
 		alignItems: 'center',
 		paddingVertical: 8,
-		paddingHorizontal: 12,
+		paddingHorizontal: 14,
 		marginRight: 16,
 	},
 
