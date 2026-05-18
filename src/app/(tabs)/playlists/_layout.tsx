@@ -12,6 +12,13 @@ const PlaylistsScreenLayout = () => {
 						headerShown: false,
 					}}
 				/>
+
+				<Stack.Screen
+					name="[name]"
+					options={{
+						headerShown: false,
+					}}
+				/>
 			</Stack>
 		</View>
 	)

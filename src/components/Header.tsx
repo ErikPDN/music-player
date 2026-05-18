@@ -6,9 +6,16 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 interface HeaderProps {
 	title: string
 	isSearchable?: boolean
+	isCreatable?: boolean
+	handleCreatePress?: () => void
 }
 
-const Header = ({ title, isSearchable = true }: HeaderProps) => {
+const Header = ({
+	title,
+	isSearchable = true,
+	isCreatable = false,
+	handleCreatePress,
+}: HeaderProps) => {
 	const handleSearchPress = () => {
 		router.push('/search')
 	}
@@ -16,16 +23,23 @@ const Header = ({ title, isSearchable = true }: HeaderProps) => {
 	return (
 		<View style={styles.headerContainer}>
 			<Text style={styles.headerTitle}>{title}</Text>
-			{isSearchable && (
-				<TouchableOpacity onPress={handleSearchPress}>
-					<FontAwesome6
-						style={styles.searchIcon}
-						name="magnifying-glass"
-						size={24}
-						color={colors.icon}
-					/>
-				</TouchableOpacity>
-			)}
+			<View style={styles.headerActions}>
+				{isSearchable && (
+					<TouchableOpacity onPress={handleSearchPress}>
+						<FontAwesome6
+							style={styles.searchIcon}
+							name="magnifying-glass"
+							size={24}
+							color={colors.icon}
+						/>
+					</TouchableOpacity>
+				)}
+				{isCreatable && (
+					<TouchableOpacity onPress={handleCreatePress}>
+						<FontAwesome6 style={styles.searchIcon} name="plus" size={24} color={colors.icon} />
+					</TouchableOpacity>
+				)}
+			</View>
 		</View>
 	)
 }
@@ -46,6 +60,12 @@ const styles = StyleSheet.create({
 	},
 	searchIcon: {
 		marginRight: 8,
+	},
+
+	headerActions: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		gap: 16,
 	},
 })
 
