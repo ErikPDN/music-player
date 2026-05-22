@@ -17,7 +17,7 @@ const PlaylistsScreen = () => {
 				data={playlists}
 				numColumns={2}
 				keyExtractor={(item) => item.name}
-				columnWrapperStyle={{ gap: 12 }}
+				columnWrapperStyle={{ paddingHorizontal: 8, paddingVertical: 4 }}
 				renderItem={({ item: playlist }: { item: Playlist }) => {
 					return (
 						<Link href={`/playlists/${playlist.name}`} asChild>

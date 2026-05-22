@@ -1,6 +1,6 @@
-import { colors } from '@/constants/tokens'
 import { Playlist } from '@/helpers/types'
 import { Image } from 'expo-image'
+import { LinearGradient } from 'expo-linear-gradient'
 import { StyleSheet, Text, TouchableHighlight, TouchableHighlightProps, View } from 'react-native'
 
 interface PlaylistItemProps extends TouchableHighlightProps {
@@ -10,14 +10,14 @@ interface PlaylistItemProps extends TouchableHighlightProps {
 export const PlaylistItem = ({ playlist, ...rest }: PlaylistItemProps) => {
 	return (
 		<TouchableHighlight {...rest} style={styles.playlistItemContainer} underlayColor="#ffffff10">
-			<View style={styles.innerContainer}>
+			<View style={styles.imageWrapper}>
 				<Image source={playlist.artworkPreview} style={styles.playlistImage} contentFit="cover" />
 
-				<Text numberOfLines={1} style={styles.playlistNameText}>
-					{playlist.name}
-				</Text>
-
-				<Text style={styles.playlistText}>{playlist.tracks.length} songs</Text>
+				<LinearGradient colors={['transparent', 'rgba(0,0,0,0.75)']} style={styles.gradient}>
+					<Text numberOfLines={1} style={styles.playlistNameText}>
+						{playlist.name}
+					</Text>
+				</LinearGradient>
 			</View>
 		</TouchableHighlight>
 	)
@@ -30,26 +30,33 @@ const styles = StyleSheet.create({
 		overflow: 'hidden',
 	},
 
-	innerContainer: {
-		flex: 1,
+	imageWrapper: {
+		width: 184,
+		height: 184,
+		borderRadius: 8,
+		overflow: 'hidden',
 	},
 
 	playlistImage: {
-		width: '100%',
-		aspectRatio: 1, // quadrado
-		borderRadius: 8,
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+	},
+
+	gradient: {
+		position: 'absolute',
+		bottom: 0,
+		left: 0,
+		right: 0,
+		paddingHorizontal: 10,
+		paddingVertical: 8,
 	},
 
 	playlistNameText: {
-		color: colors.text,
+		color: '#fff',
 		fontSize: 14,
-		fontWeight: '600',
-		marginTop: 8,
-	},
-
-	playlistText: {
-		color: colors.textMuted,
-		fontSize: 12,
-		marginTop: 2,
+		fontWeight: '700',
 	},
 })
