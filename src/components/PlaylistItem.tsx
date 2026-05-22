@@ -11,7 +11,7 @@ export const PlaylistItem = ({ playlist, ...rest }: PlaylistItemProps) => {
 	return (
 		<TouchableHighlight {...rest} style={styles.playlistItemContainer} underlayColor="#ffffff10">
 			<View style={styles.imageWrapper}>
-				<Image source={playlist.artworkPreview} style={styles.playlistImage} contentFit="cover" />
+				<Image source={playlist.artworkPreview} style={styles.playlistImage} />
 
 				<LinearGradient colors={['transparent', 'rgba(0,0,0,0.75)']} style={styles.gradient}>
 					<Text numberOfLines={1} style={styles.playlistNameText}>
@@ -25,7 +25,6 @@ export const PlaylistItem = ({ playlist, ...rest }: PlaylistItemProps) => {
 
 const styles = StyleSheet.create({
 	playlistItemContainer: {
-		flex: 1,
 		borderRadius: 8,
 		overflow: 'hidden',
 	},
