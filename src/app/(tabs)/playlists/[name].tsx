@@ -17,12 +17,14 @@ const HEADER_HEIGHT = Dimensions.get('window').height * 0.44
 
 const PlaylistDetailScreen = () => {
 	const { top } = useSafeAreaInsets()
-	const { imageColors } = usePlayerBackground(unknownTrackImageSource)
 	const { name: playlistName } = useLocalSearchParams<{ name: string }>()
 	const router = useRouter()
 	const { playlists } = usePlaylists()
 	const playlist = playlists.find((p) => p.name === playlistName)
 	const playlistTracks = playlist?.tracks ?? []
+
+	const artworkSource = playlist?.artworkPreview ?? unknownTrackImageSource
+	const { imageColors } = usePlayerBackground(artworkSource)
 
 	if (!playlist) {
 		{
@@ -33,6 +35,8 @@ const PlaylistDetailScreen = () => {
 	}
 
 	const handlePlay = useQueuePlay(playlistTracks)
+
+	console.log('IMAGE COLORS', imageColors)
 
 	return (
 		<View style={styles.container}>

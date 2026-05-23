@@ -61,7 +61,7 @@ export const TrackListItem = ({ track, onTrackPress }: TrackListItemProps) => {
 						</Text>
 
 						<Text numberOfLines={1} style={styles.trackArtistText}>
-							{track.artist ?? 'Unknown Artist'}
+							{track.artist ?? 'Unknown Artist'} {/* TODO: link para página do artista */}
 						</Text>
 					</View>
 
