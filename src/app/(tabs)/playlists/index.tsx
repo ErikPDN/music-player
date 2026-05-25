@@ -4,15 +4,25 @@ import { Playlist } from '@/helpers/types'
 import { usePlaylists } from '@/store/usePlaylist'
 import { defaultStyles } from '@/styles'
 import { Link } from 'expo-router'
+import { useState } from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { CreatePlaylistModal } from '../../(modals)/createPlaylist'
 
 const PlaylistsScreen = () => {
+	const [isModalCreatePlaylistOpen, setIsModalCreatePlaylistOpen] = useState(false)
 	const { playlists, addToPlaylist } = usePlaylists()
+
+	const handleOpenCreatePlaylistModal = () => {
+		setIsModalCreatePlaylistOpen(true)
+	}
+
+	const handleCloseCreatePlaylistModal = () => {
+		setIsModalCreatePlaylistOpen(false)
+	}
 
 	return (
 		<View style={defaultStyles.container}>
-			<Header title="Playlists" isCreatable />
-
+			<Header title="Playlists" isCreatable handleCreatePress={handleOpenCreatePlaylistModal} />
 			<FlatList
 				data={playlists}
 				numColumns={2}
@@ -37,6 +47,10 @@ const PlaylistsScreen = () => {
 						<Text style={styles.emptyText}>No playlists found</Text>
 					</View>
 				}
+			/>
+			<CreatePlaylistModal
+				isOpen={isModalCreatePlaylistOpen}
+				onClose={handleCloseCreatePlaylistModal}
 			/>
 		</View>
 	)
