@@ -10,7 +10,7 @@ import { defaultStyles } from '@/styles'
 import { FontAwesome, FontAwesome6 } from '@expo/vector-icons'
 import { Image } from 'expo-image'
 import { LinearGradient } from 'expo-linear-gradient'
-import { useRouter } from 'expo-router'
+import { Link, useRouter } from 'expo-router'
 import { useState } from 'react'
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -78,9 +78,11 @@ const PlayerScreen = () => {
 							<Text numberOfLines={1} style={styles.trackTitleText}>
 								{activeTrack.title}
 							</Text>
-							<Text numberOfLines={1} style={styles.trackArtistText}>
-								{activeTrack.artist || 'Unknown Artist'}
-							</Text>
+							<Link href={`/(tabs)/artists/${activeTrack.artist}`} asChild>
+								<Text numberOfLines={1} style={styles.trackArtistText}>
+									{activeTrack.artist || 'Unknown Artist'}
+								</Text>
+							</Link>
 						</View>
 
 						<TouchableOpacity onPress={() => setIsLiked((prev) => !prev)} style={styles.likeButton}>
