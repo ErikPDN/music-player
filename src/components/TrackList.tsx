@@ -1,6 +1,7 @@
 import { TrackListItem } from '@/components/TrackListItem'
 import { utilsStyles } from '@/styles'
 import { FlatList, FlatListProps, Text, View } from 'react-native'
+import Toast from 'react-native-toast-message'
 import TrackPlayer, { Track } from 'react-native-track-player'
 
 type TrackListProps = Partial<FlatListProps<Track>> & {
@@ -27,7 +28,10 @@ const TrackList = ({ tracks, ...props }: TrackListProps) => {
 
 			await TrackPlayer.play()
 		} catch (error) {
-			console.error('Erro ao tocar faixa:', error)
+			Toast.show({
+				type: 'error',
+				text1: 'Error while playing the track',
+			})
 		}
 	}
 
