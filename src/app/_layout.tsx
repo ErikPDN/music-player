@@ -1,9 +1,11 @@
+import { toastConfig } from '@/config/toastConfig'
 import { useLogTrackPlayer } from '@/hooks/useLogTrackPlayer'
 import { useSetupTrackPlayer } from '@/hooks/useSetupTrackPlayer'
 import { SplashScreen, Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { useCallback } from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import Toast from 'react-native-toast-message'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -22,6 +24,7 @@ const App = () => {
 		<SafeAreaProvider>
 			<RootNavigation />
 			<StatusBar style="auto" />
+			<Toast config={toastConfig} bottomOffset={90} visibilityTime={3000} />
 		</SafeAreaProvider>
 	)
 }

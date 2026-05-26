@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import Toast from 'react-native-toast-message'
 import TrackPlayer, { RepeatMode } from 'react-native-track-player'
 
 const setupPlayer = async () => {
@@ -19,9 +20,12 @@ export const useSetupTrackPlayer = ({ onLoad }: { onLoad?: () => void }) => {
 				isInitialized.current = true
 				onLoad?.()
 			})
-			.catch((error) => {
+			.catch(() => {
 				isInitialized.current = false
-				console.error('Error setting up TrackPlayer:', error)
+				Toast.show({
+					type: 'error',
+					text1: 'Error while setting up TrackPlayer',
+				})
 			})
 	}, [onLoad])
 }

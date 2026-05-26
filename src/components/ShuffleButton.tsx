@@ -19,7 +19,6 @@ function shuffleArray<T>(array: T[]): T[] {
 	return arr
 }
 
-// TODO: ajustar funcionalidade para receber a queue como parâmetro
 export const ShuffleButton = ({ iconSize, showActiveColor = false, style }: ShuffleButtonProps) => {
 	const { isShuffleActive, originalQueue, setShuffleActive, setOriginalQueue } = usePlayerStore()
 

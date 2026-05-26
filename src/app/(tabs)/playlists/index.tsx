@@ -6,7 +6,7 @@ import { defaultStyles } from '@/styles'
 import { Link } from 'expo-router'
 import { useState } from 'react'
 import { FlatList, StyleSheet, Text, View } from 'react-native'
-import { CreatePlaylistModal } from '../../(modals)/createPlaylist'
+import CreatePlaylistModal from '../../(modals)/createPlaylist'
 
 const PlaylistsScreen = () => {
 	const [isModalCreatePlaylistOpen, setIsModalCreatePlaylistOpen] = useState(false)

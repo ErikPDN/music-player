@@ -11,6 +11,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { Redirect, useLocalSearchParams, useRouter } from 'expo-router'
 import { Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import Toast from 'react-native-toast-message'
 
 const HERO_HEIGHT = Dimensions.get('window').height * 0.45
 
@@ -24,10 +25,10 @@ const ArtistDetailScreen = () => {
 	const handlePlay = useQueuePlay(artistTracks)
 
 	if (!artist) {
-		{
-			/* Criar uma toast para informar que o artista não foi encontrado */
-		}
-		console.warn('Artist not found')
+		Toast.show({
+			type: 'error',
+			text1: 'Artist not found',
+		})
 		return <Redirect href="/(tabs)/artists" />
 	}
 

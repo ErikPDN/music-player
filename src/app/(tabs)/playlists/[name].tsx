@@ -12,6 +12,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { Redirect, useLocalSearchParams, useRouter } from 'expo-router'
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import Toast from 'react-native-toast-message'
 
 const HEADER_HEIGHT = Dimensions.get('window').height * 0.44
 
@@ -27,16 +28,14 @@ const PlaylistDetailScreen = () => {
 	const { imageColors } = usePlayerBackground(artworkSource)
 
 	if (!playlist) {
-		{
-			/* TODO: Criar uma toast para informar que a playlist não foi encontrada */
-		}
-		console.warn('Playlist not found')
+		Toast.show({
+			type: 'error',
+			text1: 'Playlist not found',
+		})
 		return <Redirect href="/(tabs)/playlists" />
 	}
 
 	const handlePlay = useQueuePlay(playlistTracks)
-
-	console.log('IMAGE COLORS', imageColors)
 
 	return (
 		<View style={styles.container}>
