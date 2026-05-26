@@ -12,7 +12,7 @@ interface CreatePlaylistModalProps {
 	onClose: () => void
 }
 
-export const CreatePlaylistModal = ({ isOpen, onClose }: CreatePlaylistModalProps) => {
+const CreatePlaylistModal = ({ isOpen, onClose }: CreatePlaylistModalProps) => {
 	const [playlistName, setPlaylistName] = useState('')
 	const [error, setError] = useState<string | null>(null)
 	// const { createPlaylist, isLoading } = useCreatePlaylists()
@@ -101,6 +101,8 @@ export const CreatePlaylistModal = ({ isOpen, onClose }: CreatePlaylistModalProp
 		</Modal>
 	)
 }
+
+export default CreatePlaylistModal
 
 const styles = StyleSheet.create({
 	backdrop: {
