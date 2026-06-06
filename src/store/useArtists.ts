@@ -1,20 +1,22 @@
 import { Artist } from '@/helpers/types'
 import { useMemo } from 'react'
-import { useLibraryStore } from './useLibrary'
+import { useTracks } from './useTracks'
 
 export const useArtists = () => {
-	const tracks = useLibraryStore((state) => state.tracks)
+	const tracks = useTracks()
 
 	return useMemo(() => {
 		return tracks.reduce((acc, track) => {
-			const artist = acc.find((artist) => artist.name === track.artist)
+			if (!track.artist) return acc
+
+			const artist = acc.find((a) => a.name === track.artist)
 
 			if (artist) {
 				artist.tracks.push(track)
 			} else {
 				acc.push({
-					name: track.artist ?? 'Unknown Artist',
-					// image: track.artwork, // TODO: add futuramente
+					name: track.artist,
+					image: track.artwork ?? undefined,
 					tracks: [track],
 				})
 			}
