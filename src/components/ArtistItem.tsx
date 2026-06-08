@@ -16,7 +16,7 @@ export const ArtistItem = ({ artist, ...rest }: ArtistItemProps) => {
 			underlayColor="rgba(156, 163, 175, 0.3)"
 		>
 			<View style={styles.innerContainer}>
-				<Image source={unknownArtistImageSource} style={styles.artistImage} />
+				<Image source={artist.image ?? unknownArtistImageSource} style={styles.artistImage} />
 
 				<View style={styles.artistNameContainer}>
 					<Text numberOfLines={1} style={styles.artistNameText}>
