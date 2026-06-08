@@ -1,7 +1,7 @@
 import Header from '@/components/Header'
 import { PlaylistItem } from '@/components/PlaylistItem'
 import { Playlist } from '@/helpers/types'
-import { usePlaylists } from '@/store/usePlaylist'
+import { usePlaylist } from '@/store/usePlaylist'
 import { defaultStyles } from '@/styles'
 import { Link } from 'expo-router'
 import { useState } from 'react'
@@ -10,7 +10,7 @@ import CreatePlaylistModal from '../../(modals)/createPlaylist'
 
 const PlaylistsScreen = () => {
 	const [isModalCreatePlaylistOpen, setIsModalCreatePlaylistOpen] = useState(false)
-	const { playlists, addToPlaylist } = usePlaylists()
+	const { playlists } = usePlaylist()
 
 	const handleOpenCreatePlaylistModal = () => {
 		setIsModalCreatePlaylistOpen(true)

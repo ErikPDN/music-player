@@ -1,5 +1,5 @@
 import { colors } from '@/constants/tokens'
-import { usePlaylists } from '@/store/usePlaylist'
+import { usePlaylist } from '@/store/usePlaylist'
 import { FontAwesome6 } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
 import { useState } from 'react'
@@ -16,7 +16,7 @@ const CreatePlaylistModal = ({ isOpen, onClose }: CreatePlaylistModalProps) => {
 	const [playlistName, setPlaylistName] = useState('')
 	const [error, setError] = useState<string | null>(null)
 	// const { createPlaylist, isLoading } = useCreatePlaylists()
-	const { playlists } = usePlaylists()
+	const { playlists } = usePlaylist()
 	const hasError = error !== null
 
 	const handleCreate = () => {

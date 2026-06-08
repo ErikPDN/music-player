@@ -1,13 +1,9 @@
-import { tracks } from '@/db/schema'
+import { playlists, tracks } from '@/db/schema'
 import { Track as PlayerTrack } from 'react-native-track-player'
 
 export type Track = typeof tracks.$inferSelect
 
-export type Playlist = {
-	name: string
-	tracks: Track[]
-	artworkPreview: string
-}
+export type Playlist = typeof playlists.$inferSelect
 
 export type Artist = {
 	name: string

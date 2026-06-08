@@ -5,7 +5,7 @@ import { unknownTrackImageSource } from '@/constants/images'
 import { colors } from '@/constants/tokens'
 import { usePlayerBackground } from '@/hooks/usePlayerBackground'
 import { useQueuePlay } from '@/hooks/useQueuePlay'
-import { usePlaylists } from '@/store/usePlaylist'
+import { usePlaylist, usePlaylistTracks } from '@/store/usePlaylist'
 import { FontAwesome6 } from '@expo/vector-icons'
 import { Image } from 'expo-image'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -20,11 +20,12 @@ const PlaylistDetailScreen = () => {
 	const { top } = useSafeAreaInsets()
 	const { name: playlistName } = useLocalSearchParams<{ name: string }>()
 	const router = useRouter()
-	const { playlists } = usePlaylists()
-	const playlist = playlists.find((p) => p.name === playlistName)
-	const playlistTracks = playlist?.tracks ?? []
 
-	const artworkSource = playlist?.artworkPreview ?? unknownTrackImageSource
+	const { playlists } = usePlaylist()
+	const playlist = playlists.find((p) => p.name === playlistName)
+	const playlistTracks = usePlaylistTracks(playlist?.id ?? '')
+
+	const artworkSource = playlist?.artwork ?? unknownTrackImageSource
 	const { imageColors } = usePlayerBackground(artworkSource)
 
 	if (!playlist) {
@@ -55,9 +56,9 @@ const PlaylistDetailScreen = () => {
 				</TouchableOpacity>
 
 				<View style={styles.imageContainer}>
-					<Image source={playlist.artworkPreview} style={styles.image} />
+					<Image source={playlist.artwork ?? unknownTrackImageSource} style={styles.image} />
 					<Text style={styles.playlistName}>{playlist.name}</Text>
-					<Text style={styles.playlistTracksCountText}>{playlist.tracks.length} songs</Text>
+					<Text style={styles.playlistTracksCountText}>{playlistTracks.length} songs</Text>
 				</View>
 
 				<LinearGradient

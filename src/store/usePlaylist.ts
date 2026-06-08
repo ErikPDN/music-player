@@ -2,6 +2,7 @@ import { db } from '@/db'
 import { playlists, playlistTracks, tracks } from '@/db/schema'
 import { Track } from '@/helpers/types'
 import { eq } from 'drizzle-orm'
+import { useLiveQuery } from 'drizzle-orm/expo-sqlite'
 import { useCallback, useEffect, useState } from 'react'
 
 type PlaylistRow = typeof playlists.$inferSelect
@@ -55,5 +56,18 @@ export const getPlaylistTracks = async (playlistId: string): Promise<Track[]> =>
 		.where(eq(playlistTracks.playlistId, playlistId))
 		.orderBy(playlistTracks.position)
 
-	return result.map((r) => r.track)
+	return result.map((r) => r.track) || []
+}
+
+export const usePlaylistTracks = (playlistId: string) => {
+	const { data } = useLiveQuery(
+		db
+			.select({ track: tracks })
+			.from(tracks)
+			.innerJoin(playlistTracks, eq(playlistTracks.trackId, tracks.id))
+			.where(eq(playlistTracks.playlistId, playlistId))
+			.orderBy(playlistTracks.position),
+		[playlistId],
+	)
+	return data?.map((r) => r.track) ?? []
 }

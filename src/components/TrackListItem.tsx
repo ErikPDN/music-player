@@ -1,9 +1,10 @@
 import { unknownArtistImageSource } from '@/constants/images'
 import { colors } from '@/constants/tokens'
+import { Track } from '@/helpers/types'
 import { Entypo, Ionicons } from '@expo/vector-icons'
 import { Image } from 'expo-image'
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
-import { Track, useActiveTrack, useIsPlaying } from 'react-native-track-player'
+import { useActiveTrack, useIsPlaying } from 'react-native-track-player'
 import PlayingEqualizerIcon from './PlayingEqualizerIcon'
 
 interface TrackListItemProps {
@@ -12,7 +13,7 @@ interface TrackListItemProps {
 }
 
 export const TrackListItem = ({ track, onTrackPress }: TrackListItemProps) => {
-	const isActiveTrack = useActiveTrack()?.url === track.url
+	const isActiveTrack = useActiveTrack()?.id === track.id
 	const { playing } = useIsPlaying()
 
 	return (

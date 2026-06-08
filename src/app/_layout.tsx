@@ -14,8 +14,8 @@ const App = () => {
 	const { success } = useMigrations(db, migrations)
 
 	const handleTrackPlayerLoad = useCallback(() => {
-		SplashScreen.hideAsync()
-	}, [])
+		if (success) SplashScreen.hideAsync()
+	}, [success])
 
 	useSetupTrackPlayer({
 		onLoad: handleTrackPlayerLoad,
