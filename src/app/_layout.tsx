@@ -1,4 +1,5 @@
 import { toastConfig } from '@/config/toastConfig'
+import { db, migrations, useMigrations } from '@/db'
 import { useLogTrackPlayer } from '@/hooks/useLogTrackPlayer'
 import { useSetupTrackPlayer } from '@/hooks/useSetupTrackPlayer'
 import { SplashScreen, Stack } from 'expo-router'
@@ -10,15 +11,19 @@ import Toast from 'react-native-toast-message'
 SplashScreen.preventAutoHideAsync()
 
 const App = () => {
+	const { success } = useMigrations(db, migrations)
+
 	const handleTrackPlayerLoad = useCallback(() => {
-		SplashScreen.hideAsync()
-	}, [])
+		if (success) SplashScreen.hideAsync()
+	}, [success])
 
 	useSetupTrackPlayer({
 		onLoad: handleTrackPlayerLoad,
 	})
 
 	useLogTrackPlayer()
+
+	if (!success) return null
 
 	return (
 		<SafeAreaProvider>

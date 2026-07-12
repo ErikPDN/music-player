@@ -1,3 +1,4 @@
+import { unknownArtistImageSource } from '@/constants/images'
 import { Playlist } from '@/helpers/types'
 import { Image } from 'expo-image'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -11,7 +12,7 @@ export const PlaylistItem = ({ playlist, ...rest }: PlaylistItemProps) => {
 	return (
 		<TouchableHighlight {...rest} style={styles.playlistItemContainer} underlayColor="#ffffff10">
 			<View style={styles.imageWrapper}>
-				<Image source={playlist.artworkPreview} style={styles.playlistImage} />
+				<Image source={playlist.artwork ?? unknownArtistImageSource} style={styles.playlistImage} />
 
 				<LinearGradient colors={['transparent', 'rgba(0,0,0,0.75)']} style={styles.gradient}>
 					<Text numberOfLines={1} style={styles.playlistNameText}>

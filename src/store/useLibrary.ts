@@ -1,16 +1,18 @@
-import { TrackWithPlaylist } from '@/helpers/types'
-import { Track } from 'react-native-track-player'
+import { db } from '@/db'
+import { tracks } from '@/db/schema'
+import { Track } from '@/helpers/types'
+import { eq } from 'drizzle-orm'
 import { create } from 'zustand'
-import library from '../../assets/data/library.json'
 
 interface LibraryState {
-	tracks: TrackWithPlaylist[]
 	toggleTrackFavorite: (track: Track) => void
-	addToPlaylist: (track: Track, playlistName: string) => void
 }
 
-export const useLibraryStore = create<LibraryState>()((set) => ({
-	tracks: library,
-	toggleTrackFavorite: (track: Track) => {},
-	addToPlaylist: (track: Track, playlistName: string) => {},
+export const useLibraryStore = create<LibraryState>()((set, get) => ({
+	toggleTrackFavorite: async (track) => {
+		await db
+			.update(tracks)
+			.set({ isFavorite: track.isFavorite ? 0 : 1 })
+			.where(eq(tracks.id, track.id))
+	},
 }))

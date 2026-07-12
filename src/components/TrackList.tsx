@@ -1,8 +1,9 @@
 import { TrackListItem } from '@/components/TrackListItem'
+import { toPlayerTrack, Track } from '@/helpers/types'
 import { utilsStyles } from '@/styles'
 import { FlatList, FlatListProps, Text, View } from 'react-native'
 import Toast from 'react-native-toast-message'
-import TrackPlayer, { Track } from 'react-native-track-player'
+import TrackPlayer from 'react-native-track-player'
 
 type TrackListProps = Partial<FlatListProps<Track>> & {
 	tracks?: Track[]
@@ -15,14 +16,15 @@ const TrackList = ({ tracks, ...props }: TrackListProps) => {
 
 			const isSameQueue =
 				queue.length === tracks?.length &&
-				queue[0]?.url === tracks?.[0]?.url &&
-				queue[queue.length - 1]?.url === tracks?.[tracks.length - 1]?.url
+				queue[0]?.uri === tracks?.[0]?.uri &&
+				queue[queue.length - 1]?.uri === tracks?.[tracks.length - 1]?.uri
 
 			if (isSameQueue) {
 				await TrackPlayer.skip(index)
 			} else {
 				await TrackPlayer.reset()
-				await TrackPlayer.add(tracks || [])
+				const rnTracks = (tracks || []).map((t) => toPlayerTrack(t))
+				await TrackPlayer.add(rnTracks)
 				await TrackPlayer.skip(index)
 			}
 
