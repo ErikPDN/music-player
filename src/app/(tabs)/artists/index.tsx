@@ -1,7 +1,7 @@
 import { ArtistItem } from '@/components/ArtistItem'
 import Header from '@/components/Header'
 import { Artist } from '@/helpers/types'
-import { useArtists } from '@/store/useArtists'
+import { useArtists } from '@/hooks/useArtists'
 import { defaultStyles } from '@/styles'
 import { Link } from 'expo-router'
 import { FlatList, StyleSheet, Text, View } from 'react-native'

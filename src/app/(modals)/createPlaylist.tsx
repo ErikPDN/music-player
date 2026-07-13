@@ -1,5 +1,5 @@
 import { colors } from '@/constants/tokens'
-import { usePlaylist } from '@/store/usePlaylist'
+import { usePlaylist } from '@/hooks/usePlaylist'
 import { FontAwesome6 } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
 import { useState } from 'react'

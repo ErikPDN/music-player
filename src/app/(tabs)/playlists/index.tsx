@@ -1,7 +1,7 @@
 import Header from '@/components/Header'
 import { PlaylistItem } from '@/components/PlaylistItem'
 import { Playlist } from '@/helpers/types'
-import { usePlaylist } from '@/store/usePlaylist'
+import { usePlaylist } from '@/hooks/usePlaylist'
 import { defaultStyles } from '@/styles'
 import { Link } from 'expo-router'
 import { useState } from 'react'

@@ -3,24 +3,9 @@ import { playlists, playlistTracks, tracks } from '@/db/schema'
 import { Track } from '@/helpers/types'
 import { eq } from 'drizzle-orm'
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite'
-import { useCallback, useEffect, useState } from 'react'
-
-type PlaylistRow = typeof playlists.$inferSelect
 
 export const usePlaylist = () => {
-	const [playlistList, setPlaylistList] = useState<PlaylistRow[]>([])
-	const [isLoading, setIsLoading] = useState(false)
-
-	const loadPlaylists = useCallback(async () => {
-		setIsLoading(true)
-		const results = await db.select().from(playlists).orderBy(playlists.name)
-		setPlaylistList(results)
-		setIsLoading(false)
-	}, [])
-
-	useEffect(() => {
-		loadPlaylists()
-	}, [loadPlaylists])
+	const { data: playlistList } = useLiveQuery(db.select().from(playlists).orderBy(playlists.name))
 
 	const createPlaylist = async (name: string) => {
 		await db.insert(playlists).values({
@@ -29,7 +14,6 @@ export const usePlaylist = () => {
 			createdAt: Date.now(),
 			updatedAt: Date.now(),
 		})
-		loadPlaylists()
 	}
 
 	const addPlaylist = async (track: Track, playlistId: string) => {
@@ -45,7 +29,7 @@ export const usePlaylist = () => {
 		})
 	}
 
-	return { playlists: playlistList, isLoading, createPlaylist, addPlaylist, loadPlaylists }
+	return { playlists: playlistList ?? [], createPlaylist, addPlaylist }
 }
 
 export const getPlaylistTracks = async (playlistId: string): Promise<Track[]> => {

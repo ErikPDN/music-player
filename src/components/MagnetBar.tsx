@@ -5,9 +5,10 @@ import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native'
 interface MagnetBarProps {
 	placeholder?: string
 	magnetLink?: string
+	onAddMagnetLink?: (magnetLink: string) => void
 }
 
-export const MagnetBar = ({ placeholder, magnetLink }: MagnetBarProps) => {
+export const MagnetBar = ({ placeholder, magnetLink, onAddMagnetLink }: MagnetBarProps) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.magnetContainer}>
@@ -19,7 +20,10 @@ export const MagnetBar = ({ placeholder, magnetLink }: MagnetBarProps) => {
 					style={styles.magnetInput}
 				/>
 			</View>
-			<TouchableOpacity style={styles.addButton}>
+			<TouchableOpacity
+				style={styles.addButton}
+				onPress={() => onAddMagnetLink && onAddMagnetLink(magnetLink || '')}
+			>
 				<FontAwesome name="plus" size={20} color="#fff" />
 			</TouchableOpacity>
 		</View>
