@@ -8,6 +8,7 @@ interface MagnetBarProps {
 	onAddMagnetLink?: (magnetLink: string) => void
 }
 
+// TODO: implementar icone que indica se o link é válido ou não, e desabilitar o botão de adicionar caso seja inválido e um icone de clip
 export const MagnetBar = ({ placeholder, magnetLink, onAddMagnetLink }: MagnetBarProps) => {
 	return (
 		<View style={styles.container}>
