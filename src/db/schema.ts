@@ -1,3 +1,4 @@
+import { InferSelectModel } from 'drizzle-orm'
 import { index, integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 
 export const tracks = sqliteTable(
@@ -57,3 +58,5 @@ export const downloads = sqliteTable('downloads', {
 	errorMsg: text('error_msg'),
 	createdAt: integer('created_at').notNull(),
 })
+
+export type Download = InferSelectModel<typeof downloads>
