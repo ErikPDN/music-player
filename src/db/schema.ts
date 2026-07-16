@@ -1,5 +1,5 @@
 import { InferSelectModel } from 'drizzle-orm'
-import { index, integer, real, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 
 export const tracks = sqliteTable(
 	'tracks',
@@ -49,11 +49,16 @@ export const playlistTracks = sqliteTable('playlist_tracks', {
 
 export const downloads = sqliteTable('downloads', {
 	id: text('id').primaryKey(),
-	title: text('title'),
+	title: text('title'), // TODO: avaliar remoção
+	artist: text('artist'),
+	album: text('album'),
+	trackCount: integer('track_count'),
+	tracksCompleted: integer('tracks_completed').default(0),
+	totalBytes: integer('total_bytes'),
+	downloadedBytes: integer('downloaded_bytes').default(0),
 	sourceUrl: text('source_url'),
 	type: text('type').notNull(), // 'http' | 'torrent'
 	status: text('status').notNull(), // 'pending' | 'downloading' | 'done' | 'error'
-	progress: real('progress').default(0), // 0.0 a 1.0
 	destPath: text('dest_path'),
 	errorMsg: text('error_msg'),
 	createdAt: integer('created_at').notNull(),

@@ -15,8 +15,8 @@ export const DownloadList = ({
 	failedDownloads = [],
 }: DownloadListProps) => {
 	const sections = [
-		{ title: 'Baixando Agora', data: activeDownloads },
-		{ title: 'Concluídos', data: completedDownloads },
+		{ title: 'Downloading Now', data: activeDownloads },
+		{ title: 'Completed', data: completedDownloads },
 	].filter((section) => section.data.length > 0)
 
 	return (

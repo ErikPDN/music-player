@@ -1,9 +1,11 @@
 import { colors } from '@/constants/tokens'
 import { Download } from '@/db/schema'
+import { getProgress } from '@/helpers/download'
 import MusicNoteIcon from '@assets/images/music-note.svg'
 import { FontAwesome } from '@expo/vector-icons'
 import { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { DownloadStatus } from './DownloadStatus'
 
 interface DownloadListItemProps {
 	download: Download
@@ -11,6 +13,9 @@ interface DownloadListItemProps {
 
 export const DownloadListItem = ({ download }: DownloadListItemProps) => {
 	const isActiveDownload = download.status === 'downloading'
+	const isCompletedDownload = download.status === 'done'
+	const isFailedDownload = download.status === 'error'
+	const isPendingDownload = download.status === 'pending'
 	const [isPlaying, setIsPlaying] = useState(isActiveDownload)
 
 	return (
@@ -23,25 +28,30 @@ export const DownloadListItem = ({ download }: DownloadListItemProps) => {
 				<View style={styles.downloadTitleContainer}>
 					<Text style={styles.downloadTitleText}>{download.title}</Text>
 					<Text style={styles.downloadProgressText}>
-						{Math.round((download.progress ?? 0) * 100)}%
+						{Math.round((getProgress(download) ?? 0) * 100)}%
 					</Text>
 				</View>
 
-				{/* Nome do artista */}
-				{/* <View>
-					<Text>{download.artist}</Text>
-				</View> */}
+				<View style={styles.downloadArtistContainer}>
+					<Text style={styles.downloadArtistText}>{download.artist}</Text>
+				</View>
 
 				<View style={styles.downloadProgressBarContainer}>
 					<View
-						style={[styles.downloadProgressBar, { width: `${(download.progress ?? 0) * 100}%` }]}
+						style={[
+							styles.downloadProgressBar,
+							{ width: `${(getProgress(download) ?? 0) * 100}%` },
+						]}
 					/>
 				</View>
 
-				{/* Estado do download */}
-				<View>
-					<Text></Text>
-				</View>
+				<DownloadStatus
+					status={download.status}
+					trackCount={download.trackCount ?? 1}
+					tracksCompleted={download.tracksCompleted ?? 0}
+					totalBytes={download.totalBytes ?? 0}
+					downloadedBytes={download.downloadedBytes ?? 0}
+				/>
 			</View>
 
 			<TouchableOpacity
@@ -65,7 +75,7 @@ const styles = StyleSheet.create({
 	downloadInfoContainer: {
 		flex: 1,
 		minWidth: 0,
-		gap: 4,
+		gap: 2,
 	},
 
 	downloadArtworkPlaceholder: {
@@ -84,7 +94,6 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		gap: 8,
 	},
 
 	downloadTitleText: {
@@ -99,6 +108,15 @@ const styles = StyleSheet.create({
 		fontSize: 12,
 		color: '#666',
 		flexShrink: 1,
+	},
+
+	downloadArtistContainer: {
+		flexDirection: 'row',
+	},
+
+	downloadArtistText: {
+		fontSize: 12,
+		color: '#666',
 	},
 
 	downloadProgressBarContainer: {

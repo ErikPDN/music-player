@@ -1,0 +1,1 @@
+ALTER TABLE `downloads` ADD `tracks_completed` integer DEFAULT 0;
