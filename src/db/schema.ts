@@ -57,8 +57,8 @@ export const downloads = sqliteTable('downloads', {
 	totalBytes: integer('total_bytes'),
 	downloadedBytes: integer('downloaded_bytes').default(0),
 	sourceUrl: text('source_url'),
-	type: text('type').notNull(), // 'http' | 'torrent'
-	status: text('status').notNull(), // 'pending' | 'downloading' | 'done' | 'error'
+	type: text('type', { enum: ['http', 'torrent'] }).notNull(),
+	status: text('status', { enum: ['pending', 'downloading', 'done', 'error', 'paused'] }).notNull(),
 	destPath: text('dest_path'),
 	errorMsg: text('error_msg'),
 	createdAt: integer('created_at').notNull(),

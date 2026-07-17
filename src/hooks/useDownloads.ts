@@ -10,8 +10,11 @@ export const useDownloads = () => {
 
 	return {
 		downloads: downloadsList,
-		activeDownloads: downloadsList.filter((d) => d.status === 'pending' || d.status === 'downloading'),
+		activeDownloads: downloadsList.filter(
+			(d) => d.status === 'pending' || d.status === 'downloading',
+		),
 		completedDownloads: downloadsList.filter((d) => d.status === 'done'),
 		failedDownloads: downloadsList.filter((d) => d.status === 'error'),
+		pausedDownloads: downloadsList.filter((d) => d.status === 'paused'),
 	}
 }

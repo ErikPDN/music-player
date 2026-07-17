@@ -10,7 +10,7 @@ import { StyleSheet, View } from 'react-native'
 const DownloadsScreen = () => {
 	const handleAddMagnetLink = (magnetLink: string) => {} // TODO: Implement the logic
 
-	const { activeDownloads, completedDownloads, failedDownloads } = useDownloads()
+	const { activeDownloads, completedDownloads, failedDownloads, pausedDownloads } = useDownloads()
 
 	useEffect(() => {
 		if (__DEV__) seedMockDownloads()
@@ -30,6 +30,7 @@ const DownloadsScreen = () => {
 				activeDownloads={activeDownloads}
 				completedDownloads={completedDownloads}
 				failedDownloads={failedDownloads}
+				pausedDownloads={pausedDownloads}
 			/>
 		</View>
 	)

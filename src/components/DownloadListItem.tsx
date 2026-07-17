@@ -28,20 +28,17 @@ export const DownloadListItem = ({ download }: DownloadListItemProps) => {
 				<View style={styles.downloadTitleContainer}>
 					<Text style={styles.downloadTitleText}>{download.title}</Text>
 					<Text style={styles.downloadProgressText}>
-						{Math.round((getProgress(download) ?? 0) * 100)}%
+						{Math.round(getProgress(download) * 100)}%
 					</Text>
 				</View>
 
 				<View style={styles.downloadArtistContainer}>
-					<Text style={styles.downloadArtistText}>{download.artist}</Text>
+					<Text style={styles.downloadArtistText}>{download.artist ?? ''}</Text>
 				</View>
 
 				<View style={styles.downloadProgressBarContainer}>
 					<View
-						style={[
-							styles.downloadProgressBar,
-							{ width: `${(getProgress(download) ?? 0) * 100}%` },
-						]}
+						style={[styles.downloadProgressBar, { width: `${getProgress(download) * 100}%` }]}
 					/>
 				</View>
 
@@ -51,15 +48,25 @@ export const DownloadListItem = ({ download }: DownloadListItemProps) => {
 					tracksCompleted={download.tracksCompleted ?? 0}
 					totalBytes={download.totalBytes ?? 0}
 					downloadedBytes={download.downloadedBytes ?? 0}
+					downloadErrorText={download.errorMsg ?? ''}
 				/>
 			</View>
 
-			<TouchableOpacity
-				style={styles.downloadActionButton}
-				onPress={() => setIsPlaying(!isPlaying)}
-			>
-				<FontAwesome name={isPlaying ? 'pause' : 'play'} size={12} color="#fff" />
-			</TouchableOpacity>
+			{isFailedDownload ? (
+				<TouchableOpacity
+					style={styles.downloadErrorActionButton}
+					onPress={() => setIsPlaying(true)}
+				>
+					<FontAwesome name="rotate-right" size={12} color={colors.primary} />
+				</TouchableOpacity>
+			) : (
+				<TouchableOpacity
+					style={styles.downloadActionButton}
+					onPress={() => setIsPlaying(!isPlaying)}
+				>
+					<FontAwesome name={isPlaying ? 'pause' : 'play'} size={12} color="#fff" />
+				</TouchableOpacity>
+			)}
 		</View>
 	)
 }
@@ -140,6 +147,17 @@ const styles = StyleSheet.create({
 		color: '#fff',
 		borderWidth: 1.5,
 		borderColor: '#333',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+
+	downloadErrorActionButton: {
+		width: 32,
+		height: 32,
+		borderRadius: 999,
+		color: colors.primary,
+		borderWidth: 1.5,
+		borderColor: colors.primary,
 		justifyContent: 'center',
 		alignItems: 'center',
 	},

@@ -10,6 +10,7 @@ interface DownloadStatusProps {
 	totalBytes: number
 	downloadedBytes: number
 	tracksCompleted: number
+	downloadErrorText?: string
 }
 
 export const DownloadStatus = ({
@@ -18,17 +19,19 @@ export const DownloadStatus = ({
 	tracksCompleted = 0,
 	totalBytes,
 	downloadedBytes,
+	downloadErrorText,
 }: DownloadStatusProps) => {
 	const isActiveDownload = status === 'downloading'
 	const isCompletedDownload = status === 'done'
 	const isFailedDownload = status === 'error'
 	const isPendingDownload = status === 'pending'
+	const isPausedDownload = status === 'paused'
 
 	return (
 		<View style={styles.downloadStatusContainer}>
 			{isActiveDownload && trackCount === 1 && (
 				<>
-					<FontAwesome name="arrow-down" size={12} color={colors.primary} />
+					<Ionicons name="arrow-down" size={12} color={colors.primary} />
 					<Text style={styles.downloadStatusText}>{formatBytes(downloadedBytes ?? 0)}</Text>
 					<Text style={styles.downloadStatusText}>of</Text>
 					<Text style={styles.downloadStatusText}>{formatBytes(totalBytes ?? 0)}</Text>
@@ -36,13 +39,19 @@ export const DownloadStatus = ({
 			)}
 			{isActiveDownload && trackCount > 1 && (
 				<>
-					<FontAwesome name="arrow-down" size={12} color={colors.primary} />
+					<Ionicons name="arrow-down" size={12} color={colors.primary} />
 					<Text style={styles.downloadStatusText}>{tracksCompleted}</Text>
 					<Text style={styles.downloadStatusText}>of</Text>
 					<Text style={styles.downloadStatusText}>{trackCount} tracks</Text>
 				</>
 			)}
 			{isPendingDownload && (
+				<>
+					<Ionicons name="hourglass-outline" size={12} color="#666" />
+					<Text style={styles.downloadStatusText}>In queue</Text>
+				</>
+			)}
+			{isPausedDownload && (
 				<>
 					<Ionicons name="pause" size={12} color="#666" />
 					<Text style={styles.downloadStatusText}>Paused</Text>
@@ -52,6 +61,14 @@ export const DownloadStatus = ({
 				<>
 					<FontAwesome name="check" size={12} color={colors.primary} />
 					<Text style={styles.downloadSuccessText}>Completed</Text>
+				</>
+			)}
+			{isFailedDownload && (
+				<>
+					<FontAwesome name="exclamation-triangle" size={12} color="#f00" />
+					<Text numberOfLines={1} style={styles.downloadStatusText}>
+						{downloadErrorText ?? 'Download failed'}
+					</Text>
 				</>
 			)}
 		</View>

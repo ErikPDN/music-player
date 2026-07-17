@@ -7,15 +7,18 @@ interface DownloadListProps {
 	activeDownloads?: Download[]
 	completedDownloads?: Download[]
 	failedDownloads?: Download[]
+	pausedDownloads?: Download[]
 }
 
 export const DownloadList = ({
 	activeDownloads = [],
 	completedDownloads = [],
 	failedDownloads = [],
+	pausedDownloads = [],
 }: DownloadListProps) => {
+	const unfinishedDownloads = [...activeDownloads, ...pausedDownloads, ...failedDownloads]
 	const sections = [
-		{ title: 'Downloading Now', data: activeDownloads },
+		{ title: 'Downloading Now', data: unfinishedDownloads },
 		{ title: 'Completed', data: completedDownloads },
 	].filter((section) => section.data.length > 0)
 
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
 		flexGrow: 1,
 		flexDirection: 'column',
 		paddingHorizontal: 16,
-		paddingBottom: 175,
+		paddingBottom: 120,
 	},
 
 	downloadListSectionHeaderContainer: {

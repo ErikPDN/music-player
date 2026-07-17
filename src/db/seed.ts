@@ -1,7 +1,8 @@
 import { db } from '@/db'
 import { downloads } from '@/db/schema'
+import { InferInsertModel } from 'drizzle-orm'
 
-const mockDownloads = [
+const mockDownloads: InferInsertModel<typeof downloads>[] = [
 	{
 		id: 'mock-1',
 		title: 'United in Grief',
@@ -155,7 +156,7 @@ const mockDownloads = [
 		downloadedBytes: 45613056,
 		sourceUrl: 'magnet:?xt=urn:btih:mock11',
 		type: 'torrent',
-		status: 'downloading',
+		status: 'paused',
 		createdAt: Date.now() - 10000,
 	},
 	{
