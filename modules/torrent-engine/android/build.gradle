@@ -1,0 +1,29 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'expo.modules.torrentengine'
+version = ''
+
+android {
+  namespace "expo.modules.torrentengine"
+  defaultConfig {
+    versionCode 1
+    versionName ""
+  }
+  lintOptions {
+    abortOnError false
+  }
+}
+
+dependencies {
+  // Java API do libtorrent (sessão, magnet, alerts)
+  implementation "org.libtorrent4j:libtorrent4j:2.1.0-39"
+
+  // Bibliotecas nativas por ABI — necessário incluir a do dispositivo alvo
+  implementation "org.libtorrent4j:libtorrent4j-android-arm64:2.1.0-39"
+  implementation "org.libtorrent4j:libtorrent4j-android-arm:2.1.0-39"
+  implementation "org.libtorrent4j:libtorrent4j-android-x86_64:2.1.0-39"
+  implementation "org.libtorrent4j:libtorrent4j-android-x86:2.1.0-39"
+}

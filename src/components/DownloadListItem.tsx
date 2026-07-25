@@ -15,8 +15,10 @@ export const DownloadListItem = ({ download }: DownloadListItemProps) => {
 	const isActiveDownload = download.status === 'downloading'
 	const isCompletedDownload = download.status === 'done'
 	const isFailedDownload = download.status === 'error'
-	const isPendingDownload = download.status === 'pending'
 	const [isPlaying, setIsPlaying] = useState(isActiveDownload)
+	const trackCount = download.trackCount ?? 0
+	const subtitleText =
+		trackCount > 1 ? `${download.artist} · Album · ${trackCount} tracks` : download.artist
 
 	return (
 		<View style={styles.downloadListItemContainer}>
@@ -27,13 +29,14 @@ export const DownloadListItem = ({ download }: DownloadListItemProps) => {
 			<View style={styles.downloadInfoContainer}>
 				<View style={styles.downloadTitleContainer}>
 					<Text style={styles.downloadTitleText}>{download.title}</Text>
+
 					<Text style={styles.downloadProgressText}>
 						{Math.round(getProgress(download) * 100)}%
 					</Text>
 				</View>
 
-				<View style={styles.downloadArtistContainer}>
-					<Text style={styles.downloadArtistText}>{download.artist ?? ''}</Text>
+				<View style={styles.downloadSubtitleContainer}>
+					<Text style={styles.downloadSubtitleText}>{subtitleText ?? ''}</Text>
 				</View>
 
 				<View style={styles.downloadProgressBarContainer}>
@@ -117,11 +120,11 @@ const styles = StyleSheet.create({
 		flexShrink: 1,
 	},
 
-	downloadArtistContainer: {
+	downloadSubtitleContainer: {
 		flexDirection: 'row',
 	},
 
-	downloadArtistText: {
+	downloadSubtitleText: {
 		fontSize: 12,
 		color: '#666',
 	},
