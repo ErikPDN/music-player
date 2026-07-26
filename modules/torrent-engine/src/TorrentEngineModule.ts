@@ -3,7 +3,7 @@ import { NativeModule, requireNativeModule } from 'expo'
 import { TorrentEngineModuleEvents } from './TorrentEngine.types'
 
 declare class TorrentEngineModule extends NativeModule<TorrentEngineModuleEvents> {
-	addMagnet(magnetUri: string): Promise<void>
+	addMagnet(downloadId: string, magnetUri: string, savePath: string): Promise<void>
 	pause(downloadId: string): Promise<void>
 	resume(downloadId: string): Promise<void>
 	remove(downloadId: string, deleteFiles: boolean): Promise<void>
