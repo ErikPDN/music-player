@@ -2,6 +2,7 @@ package expo.modules.torrentengine
 
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
+import org.libtorrent4j.AlertListener
 
 class TorrentEngineModule : Module() {
   override fun definition() = ModuleDefinition {
@@ -9,16 +10,39 @@ class TorrentEngineModule : Module() {
 
     Events("onMetadata", "onProgress", "onFileComplete", "onError")
 
-    AsyncFunction("addMagnet") { magnetUri: String ->
-      // TODO: iniciar sessão libtorrent4j e adicionar o magnet
+    OnCreate {
+      TorrentSession.ensureStarted()
+      TorrentSession.addListener(object: AlertListener {
+        override fun types(): IntArray? = null // todos os tipos, ou filtre com os códigos específicos
+        
+        override fun alert(alert: Alert<*>) {
+          when (alert.type()) {
+            AlertType.TORRENT_FINISHED -> {
+              val a = alert as TorrentFinishedAlert
+              val downloadID = TorrentSession.downloadIdForInfoHash(a.handle().infoHash().toString()) ?: return
+              sendEvent("onFileComplete", mapOf("downloadId" to downloadID))
+            }
+            AlertType.TORRENT_ERROR -> {
+              val a = alert as TorrentErrorAlert
+              val downloadID = TorrentSession.downloadIdForInfoHash(a.handle().infoHash().toString()) ?: return
+              sendEvent("onError", mapOf("downloadId" to downloadID, "message" to a.error().message()))
+            }
+            else -> {}
+          }
+        }
+      })
+    }
+    
+    AsyncFunction("addMagnet") { downloadId: String, magnetUri: String, savePath: String ->
+      TorrentSession.addMagnet(downloadId, magnetUri, savePath)
     }
 
     AsyncFunction("pause") { downloadId: String ->
-      // TODO: pausar o torrent correspondente
+      TorrentSession.pause(downloadId)
     }
 
     AsyncFunction("resume") { downloadId: String ->
-      // TODO: retomar o torrent correspondente
+      TorrentSession.resume(downloadId)
     }
 
     AsyncFunction("remove") { downloadId: String, deleteFiles: Boolean ->
