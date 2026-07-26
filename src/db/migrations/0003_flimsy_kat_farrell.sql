@@ -1,0 +1,1 @@
+ALTER TABLE `downloads` ADD `updated_at` integer NOT NULL;

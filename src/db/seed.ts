@@ -16,6 +16,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		type: 'torrent',
 		status: 'downloading',
 		createdAt: Date.now(),
+		updatedAt: Date.now(),
 	},
 	{
 		id: 'mock-2',
@@ -30,6 +31,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		type: 'torrent',
 		status: 'pending',
 		createdAt: Date.now() - 1000,
+		updatedAt: Date.now() - 1000,
 	},
 	{
 		id: 'mock-3',
@@ -44,6 +46,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		type: 'http',
 		status: 'done',
 		createdAt: Date.now() - 2000,
+		updatedAt: Date.now() - 2000,
 	},
 	{
 		id: 'mock-4',
@@ -59,6 +62,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		status: 'error',
 		errorMsg: 'Connection timed out',
 		createdAt: Date.now() - 3000,
+		updatedAt: Date.now() - 3000,
 	},
 	{
 		id: 'mock-5',
@@ -73,6 +77,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		type: 'http',
 		status: 'done',
 		createdAt: Date.now() - 4000,
+		updatedAt: Date.now() - 4000,
 	},
 	{
 		id: 'mock-6',
@@ -87,6 +92,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		type: 'torrent',
 		status: 'downloading',
 		createdAt: Date.now() - 5000,
+		updatedAt: Date.now() - 5000,
 	},
 	{
 		id: 'mock-7',
@@ -101,6 +107,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		type: 'http',
 		status: 'downloading',
 		createdAt: Date.now() - 6000,
+		updatedAt: Date.now() - 6000,
 	},
 	{
 		id: 'mock-8',
@@ -115,6 +122,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		type: 'torrent',
 		status: 'pending',
 		createdAt: Date.now() - 7000,
+		updatedAt: Date.now() - 7000,
 	},
 	{
 		id: 'mock-9',
@@ -130,6 +138,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		status: 'error',
 		errorMsg: '404 Not Found',
 		createdAt: Date.now() - 8000,
+		updatedAt: Date.now() - 8000,
 	},
 	{
 		id: 'mock-10',
@@ -144,6 +153,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		type: 'torrent',
 		status: 'done',
 		createdAt: Date.now() - 9000,
+		updatedAt: Date.now() - 9000,
 	},
 	{
 		id: 'mock-11',
@@ -158,6 +168,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		type: 'torrent',
 		status: 'paused',
 		createdAt: Date.now() - 10000,
+		updatedAt: Date.now() - 10000,
 	},
 	{
 		id: 'mock-12',
@@ -173,6 +184,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		status: 'error',
 		errorMsg: 'Connection reset by peer',
 		createdAt: Date.now() - 11000,
+		updatedAt: Date.now() - 11000,
 	},
 	{
 		id: 'mock-13',
@@ -187,6 +199,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		type: 'http',
 		status: 'pending',
 		createdAt: Date.now() - 12000,
+		updatedAt: Date.now() - 12000,
 	},
 	{
 		id: 'mock-14',
@@ -201,6 +214,7 @@ const mockDownloads: InferInsertModel<typeof downloads>[] = [
 		type: 'torrent',
 		status: 'done',
 		createdAt: Date.now() - 13000,
+		updatedAt: Date.now() - 13000,
 	},
 ]
 

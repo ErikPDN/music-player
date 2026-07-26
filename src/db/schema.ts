@@ -62,6 +62,7 @@ export const downloads = sqliteTable('downloads', {
 	destPath: text('dest_path'),
 	errorMsg: text('error_msg'),
 	createdAt: integer('created_at').notNull(),
+	updatedAt: integer('updated_at').notNull(),
 })
 
 export type Download = InferSelectModel<typeof downloads>

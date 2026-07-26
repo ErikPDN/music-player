@@ -2,6 +2,7 @@ import { toastConfig } from '@/config/toastConfig'
 import { db, migrations, useMigrations } from '@/db'
 import { useLogTrackPlayer } from '@/hooks/useLogTrackPlayer'
 import { useSetupTrackPlayer } from '@/hooks/useSetupTrackPlayer'
+import { useTorrentEngineListeners } from '@/hooks/useTorrentEngineListeners'
 import { SplashScreen, Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { useCallback } from 'react'
@@ -22,6 +23,8 @@ const App = () => {
 	})
 
 	useLogTrackPlayer()
+
+	useTorrentEngineListeners()
 
 	if (!success) return null
 
