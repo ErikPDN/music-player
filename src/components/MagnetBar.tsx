@@ -1,4 +1,5 @@
 import { colors } from '@/constants/tokens'
+import { isValidMagnetUri } from '@/helpers/magnet'
 import { FontAwesome } from '@expo/vector-icons'
 import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native'
 
@@ -6,10 +7,17 @@ interface MagnetBarProps {
 	placeholder?: string
 	magnetLink?: string
 	onAddMagnetLink?: (magnetLink: string) => void
+	onChangeText?: (text: string) => void
 }
 
-// TODO: implementar icone que indica se o link é válido ou não, e desabilitar o botão de adicionar caso seja inválido e um icone de clip
-export const MagnetBar = ({ placeholder, magnetLink, onAddMagnetLink }: MagnetBarProps) => {
+export const MagnetBar = ({
+	placeholder,
+	magnetLink,
+	onAddMagnetLink,
+	onChangeText,
+}: MagnetBarProps) => {
+	const isValidMagnetLink = !!magnetLink && isValidMagnetUri(magnetLink)
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.magnetContainer}>
@@ -19,11 +27,13 @@ export const MagnetBar = ({ placeholder, magnetLink, onAddMagnetLink }: MagnetBa
 					placeholderTextColor="#9ca3af"
 					value={magnetLink}
 					style={styles.magnetInput}
+					onChangeText={onChangeText}
 				/>
 			</View>
 			<TouchableOpacity
-				style={styles.addButton}
+				style={[styles.addButton, !isValidMagnetLink && { opacity: 0.4 }]}
 				onPress={() => onAddMagnetLink && onAddMagnetLink(magnetLink || '')}
+				disabled={!isValidMagnetLink}
 			>
 				<FontAwesome name="plus" size={20} color="#fff" />
 			</TouchableOpacity>

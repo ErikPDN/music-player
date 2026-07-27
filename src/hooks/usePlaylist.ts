@@ -3,13 +3,14 @@ import { playlists, playlistTracks, tracks } from '@/db/schema'
 import { Track } from '@/helpers/types'
 import { eq } from 'drizzle-orm'
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite'
+import * as Crypto from 'expo-crypto'
 
 export const usePlaylist = () => {
 	const { data: playlistList } = useLiveQuery(db.select().from(playlists).orderBy(playlists.name))
 
 	const createPlaylist = async (name: string) => {
 		await db.insert(playlists).values({
-			id: crypto.randomUUID(),
+			id: Crypto.randomUUID(),
 			name,
 			createdAt: Date.now(),
 			updatedAt: Date.now(),

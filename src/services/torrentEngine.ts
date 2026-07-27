@@ -1,11 +1,12 @@
 import { db } from '@/db'
 import { downloads } from '@/db/schema'
 import { eq } from 'drizzle-orm'
+import * as Crypto from 'expo-crypto'
 import { Directory, Paths } from 'expo-file-system'
 import TorrentEngineModule from '../../modules/torrent-engine'
 
 export const addMagnetDownload = async (magnetUri: string) => {
-	const downloadId = crypto.randomUUID()
+	const downloadId = Crypto.randomUUID()
 
 	const directory = new Directory(Paths.document, 'downloads', downloadId)
 	directory.create({ intermediates: true, idempotent: true })
